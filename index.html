@@ -49,112 +49,87 @@
     padding: 0 32px;
   }
 
-  /* ===== Top rail ===== */
-  .rail {
+  /* ===== Topbar ===== */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 10, 12, 0.78);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .topbar-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 48px;
+    height: 48px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 24px 0;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .topbar-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .topbar-flame {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border-radius: 2px;
+    display: block;
+    pointer-events: none;
+  }
+
+  .topbar-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  .topbar-current {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-muted);
-    border-bottom: 1px solid var(--border);
+    min-width: 0;
+    overflow: hidden;
+    transition: opacity 0.25s ease;
   }
 
-  .rail-mark {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .rail-mark .glyph {
-    width: 8px;
-    height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2.4s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  /* ===== Hero ===== */
-  .hero {
-    padding: 96px 0 80px;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-  }
-
-  .hero-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+  .topbar-current-num {
     color: var(--accent);
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
-  }
-
-  .hero h1 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(48px, 9vw, 112px);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    margin: 0 0 32px;
-    max-width: 14ch;
-  }
-
-  .hero h1 em {
     font-style: italic;
-    color: var(--accent);
+    font-weight: 500;
   }
 
-  .hero-lede {
-    font-size: 15px;
-    line-height: 1.7;
-    max-width: 56ch;
-    color: var(--fg);
-    margin: 0 0 16px;
+  .topbar-current-sep {
+    color: var(--fg-faint);
   }
 
-  .hero-meta {
-    margin-top: 48px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 32px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-  }
-
-  .hero-meta-item .label {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--fg-muted);
-    margin-bottom: 6px;
-  }
-
-  .hero-meta-item .value {
-    font-family: var(--serif);
-    font-size: 22px;
-    line-height: 1.2;
+  .topbar-current-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* ===== Specimen grid ===== */
   .specimens {
-    padding: 80px 0;
+    padding: 40px 0 80px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 48px 32px;
@@ -403,53 +378,27 @@
     .specimen.featured { grid-column: auto; }
     .specimen.featured .canvas-frame { aspect-ratio: 4 / 3; }
     .specimen.featured .specimen-title { font-size: 32px; }
-    .hero { padding: 56px 0 48px; }
-    .hero-meta { grid-template-columns: 1fr 1fr; gap: 20px; }
     .seealso h2 { font-size: 40px; }
   }
 </style>
 </head>
 <body>
 
-<div class="page">
-
-  <!-- ===== TOP RAIL ===== -->
-  <div class="rail">
-    <div class="rail-mark">
-      <span class="glyph"></span>
-      <span>Live · 12 specimens</span>
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-mark">
+      <canvas class="topbar-flame" data-effect="fire"></canvas>
+      <span class="topbar-title">Graphics Anthology</span>
     </div>
-    <div>Vol. 01 / Graphics</div>
+    <div class="topbar-current">
+      <span class="topbar-current-num">001</span>
+      <span class="topbar-current-sep">·</span>
+      <span class="topbar-current-name">The Doom fire effect</span>
+    </div>
   </div>
+</nav>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="hero-eyebrow">A field guide</div>
-    <h1>Cheap tricks <em>for</em> beautiful frames</h1>
-    <p class="hero-lede">
-      Twelve specimens of the cleverness that powered video games before computers
-      were fast enough to do it the boring way. Each runs live below; each was once
-      a small revolution. The trick, almost always, is to do less work — not faster work.
-    </p>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <div class="label">Era</div>
-        <div class="value">1980&ndash;2005</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="label">Median LOC</div>
-        <div class="value">≈ 30</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="label">Compute</div>
-        <div class="value">Negligible</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="label">Beauty</div>
-        <div class="value" style="color: var(--accent); font-style: italic;">Disproportionate</div>
-      </div>
-    </div>
-  </section>
+<div class="page">
 
   <!-- ===== SPECIMENS ===== -->
   <section class="specimens">
@@ -2555,6 +2504,49 @@ void main() {
   }, { threshold: 0.05 });
 
   for (const inst of instances) io.observe(inst.canvas);
+
+  // ============================================================
+  //   TOPBAR — track current specimen as you scroll
+  // ============================================================
+  // A second IntersectionObserver focused on a thin band in the
+  // middle of the viewport. Whichever specimen is in that band
+  // is "current" and labels the topbar.
+  (function setupTopbar() {
+    const numEl  = document.querySelector('.topbar-current-num');
+    const nameEl = document.querySelector('.topbar-current-name');
+    if (!numEl || !nameEl) return;
+
+    const articles = document.querySelectorAll('article.specimen');
+    if (!articles.length) return;
+
+    let current = null;
+    const setCurrent = (article) => {
+      if (article === current) return;
+      current = article;
+      const num = article.querySelector('.specimen-num')?.textContent.trim() || '';
+      const name = article.querySelector('.specimen-title')?.textContent.trim() || '';
+      // tiny crossfade
+      const cur = document.querySelector('.topbar-current');
+      cur.style.opacity = '0';
+      setTimeout(() => {
+        numEl.textContent = num;
+        nameEl.textContent = name;
+        cur.style.opacity = '1';
+      }, 120);
+    };
+
+    // Trigger band: middle 30% of viewport
+    const obs = new IntersectionObserver((entries) => {
+      // Pick the most recently-entered article in the band
+      const entered = entries.filter(e => e.isIntersecting);
+      if (entered.length === 0) return;
+      // Prefer the one whose top is highest in the band (most recently scrolled into)
+      entered.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      setCurrent(entered[0].target);
+    }, { rootMargin: '-35% 0% -55% 0%' });
+
+    for (const a of articles) obs.observe(a);
+  })();
 </script>
 
 </body>
