@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Field Guide to Graphics Tricks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg-elevated: #111114;
+    --border: #1c1c20;
+    --border-hover: #2a2a30;
+    --fg: #f4f1ea;
+    --fg-muted: #8a8680;
+    --fg-faint: #4a4640;
+    --accent: #ff7e3d;
+    --accent-dim: #b85a2a;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--mono);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 20% 0%, rgba(255, 126, 61, 0.04), transparent 40%),
+      radial-gradient(circle at 80% 30%, rgba(255, 126, 61, 0.02), transparent 40%);
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ===== Top rail ===== */
+  .rail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .rail-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .rail-mark .glyph {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 96px 0 80px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(48px, 9vw, 112px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 0 0 32px;
+    max-width: 14ch;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-lede {
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 56ch;
+    color: var(--fg);
+    margin: 0 0 16px;
+  }
+
+  .hero-meta {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-meta-item .label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 6px;
+  }
+
+  .hero-meta-item .value {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  /* ===== Specimen grid ===== */
+  .specimens {
+    padding: 80px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 32px;
+  }
+
+  .specimen {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .specimen.featured {
+    grid-column: 1 / -1;
+  }
+
+  .specimen-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    color: var(--fg-muted);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .specimen-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 36px;
+    color: var(--accent);
+    letter-spacing: 0;
+    line-height: 1;
+    text-transform: none;
+  }
+
+  .specimen-head .sep {
+    width: 4px;
+    height: 4px;
+    background: var(--fg-faint);
+    border-radius: 50%;
+    align-self: center;
+  }
+
+  .specimen-head .lines {
+    color: var(--fg);
+  }
+
+  .canvas-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #000;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .specimen.featured .canvas-frame {
+    aspect-ratio: 21 / 9;
+  }
+
+  .canvas-frame:hover {
+    border-color: var(--border-hover);
+  }
+
+  .canvas-frame canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .canvas-frame.pixelated canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  .canvas-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px 14px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(244, 241, 234, 0.5);
+    mix-blend-mode: difference;
+  }
+
+  .canvas-overlay .top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .canvas-overlay .bot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .canvas-overlay .live {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .canvas-overlay .live::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+
+  .specimen-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .specimen-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .specimen.featured .specimen-title {
+    font-size: 44px;
+  }
+
+  .specimen-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--fg);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .specimen-hint {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+
+  .specimen-hint::before {
+    content: '→ ';
+    color: var(--accent);
+  }
+
+  /* ===== See Also ===== */
+  .seealso {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .seealso h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    max-width: 16ch;
+  }
+
+  .seealso h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .seealso-intro {
+    font-size: 14px;
+    max-width: 60ch;
+    line-height: 1.7;
+    margin: 0 0 56px;
+    color: var(--fg);
+  }
+
+  .seealso-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+  }
+
+  .seealso-item {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .seealso-item h3 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 12px;
+    color: var(--fg);
+  }
+
+  .seealso-item p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    padding: 48px 0 64px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  footer em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--fg);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 760px) {
+    .page { padding: 0 20px; }
+    .specimens {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+    .specimen.featured { grid-column: auto; }
+    .specimen.featured .canvas-frame { aspect-ratio: 4 / 3; }
+    .specimen.featured .specimen-title { font-size: 32px; }
+    .hero { padding: 56px 0 48px; }
+    .hero-meta { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .seealso h2 { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ===== TOP RAIL ===== -->
+  <div class="rail">
+    <div class="rail-mark">
+      <span class="glyph"></span>
+      <span>Live · 9 specimens</span>
+    </div>
+    <div>Vol. 01 / Graphics</div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-eyebrow">A field guide</div>
+    <h1>Cheap tricks <em>for</em> beautiful frames</h1>
+    <p class="hero-lede">
+      Nine specimens of the cleverness that powered video games before computers
+      were fast enough to do it the boring way. Each runs live below; each was once
+      a small revolution. The trick, almost always, is to do less work — not faster work.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="label">Era</div>
+        <div class="value">1980&ndash;2005</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Median LOC</div>
+        <div class="value">≈ 30</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Compute</div>
+        <div class="value">Negligible</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Beauty</div>
+        <div class="value" style="color: var(--accent); font-style: italic;">Disproportionate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPECIMENS ===== -->
+  <section class="specimens">
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">001</span>
+        <span>id Software</span>
+        <span class="sep"></span>
+        <span>1995</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 20 lines</span>
+        <span class="sep"></span>
+        <span>Cellular automaton</span>
+      </div>
+      <div class="canvas-frame pixelated">
+        <canvas data-effect="fire"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>120 × 90</span>
+            <span class="live">Running</span>
+          </div>
+          <div class="bot">
+            <span>37-color palette</span>
+            <span>↑ propagate · cool</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">The Doom <em>fire</em> effect</h2>
+      <p class="specimen-desc">
+        Each pixel reads from the row below with random horizontal jitter; a coin flip
+        dims it by one palette index. Bottom row stays maxed. The flicker, the rising
+        wisps, the fade — all of it falls out of four lines and a good palette.
+      </p>
+      <p class="specimen-hint">Click the canvas to swap palettes.</p>
+    </article>
+
+    <article class="specimen">
+      <div class="specimen-head">
+        <span class="specimen-num">002</span>
+        <span>Reynolds</span>
+        <span class="sep"></span>
+        <span>1986</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 35 lines</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="boids"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>140 agents</span>
+            <span class="live">Flocking</span>
+          </div>
+          <div class="bot">
+            <span>separation · alignment · cohesion</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title"><em>Boids</em></h2>
+      <p class="specimen-desc">
+        Three forces per agent: separate from the close, align with the near,
+        steer toward the average. No central coordinator, no flock state — coherent
+        flocking emerges from local rules.
+      </p>
+      <p class="specimen-hint">Move the cursor to scatter them.</p>
+    </article>
+
+    <article class="specimen">
+      <div class="specimen-head">
+        <span class="specimen-num">003</span>
+        <span>Verlet</span>
+        <span class="sep"></span>
+        <span>1967</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 25 lines</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="rope"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>40 nodes · 39 constraints</span>
+            <span class="live">Settling</span>
+          </div>
+          <div class="bot">
+            <span>position-only integration</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Verlet <em>chain</em></h2>
+      <p class="specimen-desc">
+        Each particle remembers only its current and previous position; velocity is implicit
+        in the difference. Constraints become projections — clamp the distance, let the next
+        frame catch up. The math is older than calculus.
+      </p>
+      <p class="specimen-hint">Move the cursor over the canvas to swing it.</p>
+    </article>
+
+    <article class="specimen">
+      <div class="specimen-head">
+        <span class="specimen-num">004</span>
+        <span>Perlin</span>
+        <span class="sep"></span>
+        <span>1983</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 40 lines</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="flow"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>600 particles</span>
+            <span class="live">Drifting</span>
+          </div>
+          <div class="bot">
+            <span>noise → angle → motion</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Perlin <em>flow field</em></h2>
+      <p class="specimen-desc">
+        A 2D noise field, each value reinterpreted as an angle. Particles drift along the
+        local flow direction, leaving trails. The noise stays the same; the particles trace
+        it for you.
+      </p>
+      <p class="specimen-hint">Click to reseed the field.</p>
+    </article>
+
+    <article class="specimen">
+      <div class="specimen-head">
+        <span class="specimen-num">005</span>
+        <span>Fournier · Fussell · Carpenter</span>
+        <span class="sep"></span>
+        <span>1982</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 30 lines</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="terrain"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>129 × 129 heightmap</span>
+            <span class="live">Generating</span>
+          </div>
+          <div class="bot">
+            <span>recursive midpoint subdivision</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Diamond <em>square</em></h2>
+      <p class="specimen-desc">
+        Start with four corner heights. Set the midpoint to their average plus a random
+        jitter. Recurse, halving the jitter each level. Out pops a believable mountain
+        range — fractal terrain in a couple dozen lines.
+      </p>
+      <p class="specimen-hint">Click to regenerate.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">006</span>
+        <span>Nintendo · SNES</span>
+        <span class="sep"></span>
+        <span>1990</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 25 lines</span>
+        <span class="sep"></span>
+        <span>One divide per scanline</span>
+      </div>
+      <div class="canvas-frame pixelated">
+        <canvas data-effect="mode7"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>360 × 154</span>
+            <span class="live">Cruising</span>
+          </div>
+          <div class="bot">
+            <span>perspective-mapped texture</span>
+            <span>F-Zero, Mario Kart</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Mode <em>7</em></h2>
+      <p class="specimen-desc">
+        A perspective ground plane on hardware that couldn't do 3D. For each scanline
+        of the floor, one division gives you world depth at that row; sample the texture
+        along it linearly. F-Zero, Mario Kart, every fake racing game of the 16-bit era.
+      </p>
+    </article>
+
+    <article class="specimen">
+      <div class="specimen-head">
+        <span class="specimen-num">007</span>
+        <span>Spatial subdivision</span>
+        <span class="sep"></span>
+        <span>1980s</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 30 lines</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="hash"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>320 balls · O(N)</span>
+            <span class="live">Colliding</span>
+          </div>
+          <div class="bot">
+            <span>grid-bucket broad phase</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Spatial <em>hash</em></h2>
+      <p class="specimen-desc">
+        Hash each object's position into a grid cell; only test pairs that share a cell.
+        Three hundred bouncing balls become O(N) instead of O(N²). The same trick scales
+        to particle systems and character collisions.
+      </p>
+      <p class="specimen-hint">Click anywhere to push the balls.</p>
+    </article>
+
+    <article class="specimen">
+      <div class="specimen-head">
+        <span class="specimen-num">008</span>
+        <span>Damped harmonic oscillator</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 10 lines</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="spring"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>linear vs critically damped</span>
+            <span class="live">Tracking</span>
+          </div>
+          <div class="bot">
+            <span>lerp arrives flat · spring arrives soft</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Critically <em>damped</em> spring</h2>
+      <p class="specimen-desc">
+        Linear interpolation overshoots its target on impulse and feels artificial. A
+        critically damped spring — closed-form, ten lines — never overshoots and always
+        arrives. Once you feel the difference, you'll never use lerp for camera follow again.
+      </p>
+      <p class="specimen-hint">Move the cursor to compare.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">009</span>
+        <span>Frisken · Quilez et al.</span>
+        <span class="sep"></span>
+        <span>1990s&ndash;2000s</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 20 lines</span>
+        <span class="sep"></span>
+        <span>Implicit geometry</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="sdf"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>distance field · smin blend</span>
+            <span class="live">Morphing</span>
+          </div>
+          <div class="bot">
+            <span>no triangles · no meshes · pure math</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Signed <em>distance</em> blobs</h2>
+      <p class="specimen-desc">
+        Define each shape by a function returning its distance to any point. Compose
+        with <code style="font-family: var(--mono); color: var(--accent);">min</code> for hard unions, with a soft variant for liquid blends.
+        Render by reading the field. The same idea, in three dimensions on a GPU,
+        draws Inigo Quilez's entire universe.
+      </p>
+      <p class="specimen-hint">Move the cursor to attract a blob.</p>
+    </article>
+
+  </section>
+
+  <!-- ===== SEE ALSO ===== -->
+  <section class="seealso">
+    <h2>Tricks you can <em>feel</em> but not see</h2>
+    <p class="seealso-intro">
+      Some of the most beautiful optimizations don't show up on a canvas — they show up
+      in a frame budget. A few worth knowing about even though they refuse to be drawn.
+    </p>
+    <div class="seealso-grid">
+
+      <div class="seealso-item">
+        <h3>Fast inverse square root</h3>
+        <p>
+          Reinterpret a float as an integer, subtract from <code style="color: var(--accent);">0x5f3759df</code>,
+          shift right by one, refine once with Newton-Raphson. Two lines, ~4× faster than
+          the math library, accurate to 1%. Quake III shipped it in 1999.
+        </p>
+      </div>
+
+      <div class="seealso-item">
+        <h3>Quaternions for rotation</h3>
+        <p>
+          Four numbers instead of nine. Compose rotations with 16 multiplies instead of 27,
+          interpolate smoothly with slerp, and dodge gimbal lock entirely. Every 3D engine
+          uses them under the hood for cameras and skeletal animation.
+        </p>
+      </div>
+
+      <div class="seealso-item">
+        <h3>Bilinear filtering as a free lerp</h3>
+        <p>
+          GPUs interpolate texture samples in hardware. Encode anything — a lookup table,
+          a height field, a gradient — into a texture, sample between texels, and you've
+          got linear interpolation for the cost of a memory read.
+        </p>
+      </div>
+
+      <div class="seealso-item">
+        <h3>Bresenham's line algorithm</h3>
+        <p>
+          Draw a line using only integer addition and comparison — no floats, no division.
+          The same family gives you midpoint circles and antialiased curves. Quietly still
+          shipping in plotters, embedded displays, and pixel-art tools.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div>A field guide · <em>compiled with care</em></div>
+    <div>Open source ideas · public-domain math</div>
+  </footer>
+
+</div>
+
+<script>
+  // ============================================================
+  //   SHARED INFRASTRUCTURE
+  // ============================================================
+
+  const ACCENT = '#ff7e3d';
+  const ACCENT_DIM = '#b85a2a';
+  const FG = '#f4f1ea';
+  const BG = '#0a0a0c';
+
+  class Effect {
+    constructor(canvas) {
+      this.canvas = canvas;
+      this.ctx = canvas.getContext('2d', { alpha: false });
+      this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+      this.tick = 0;
+      this.running = false;
+      this.mx = null; this.my = null;
+      this.pmx = null; this.pmy = null;
+
+      this.canvas.addEventListener('mousemove', e => {
+        const r = this.canvas.getBoundingClientRect();
+        this.pmx = this.mx; this.pmy = this.my;
+        this.mx = e.clientX - r.left;
+        this.my = e.clientY - r.top;
+      });
+      this.canvas.addEventListener('mouseleave', () => {
+        this.mx = null; this.my = null;
+      });
+      this.canvas.addEventListener('click', e => {
+        const r = this.canvas.getBoundingClientRect();
+        const cx = e.clientX - r.left;
+        const cy = e.clientY - r.top;
+        if (this.onClick) this.onClick(cx, cy);
+      });
+
+      this._setSize();
+      this.init();
+      if (this.onResize) this.onResize();
+      const ro = new ResizeObserver(() => {
+        this._setSize();
+        if (this.onResize) this.onResize();
+      });
+      ro.observe(this.canvas);
+    }
+    _setSize() {
+      const r = this.canvas.getBoundingClientRect();
+      if (r.width === 0) return;
+      this.w = r.width;
+      this.h = r.height;
+      this.canvas.width = Math.floor(this.w * this.dpr);
+      this.canvas.height = Math.floor(this.h * this.dpr);
+      this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    }
+    start() {
+      if (this.running) return;
+      this.running = true;
+      const loop = () => {
+        if (!this.running) return;
+        this.update();
+        this.render();
+        this.tick++;
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+    }
+    stop() { this.running = false; }
+    init() {} update() {} render() {}
+  }
+
+  // ============================================================
+  //   001 · DOOM FIRE
+  // ============================================================
+  class FireEffect extends Effect {
+    init() {
+      this.W = 120; this.H = 90;
+      this.buffer = new Uint8Array(this.W * this.H);
+      for (let x = 0; x < this.W; x++) this.buffer[(this.H-1)*this.W + x] = 36;
+
+      const fire = [[7,7,7],[31,7,7],[47,15,7],[71,15,7],[87,23,7],[103,31,7],[119,31,7],[143,39,7],[159,47,7],[175,63,7],[191,71,7],[199,71,7],[223,79,7],[223,87,7],[223,87,7],[215,95,7],[215,95,7],[215,103,15],[207,111,15],[207,119,15],[207,127,15],[207,135,23],[199,135,23],[199,143,23],[199,151,31],[191,159,31],[191,159,31],[191,167,39],[191,167,39],[191,175,47],[183,175,47],[183,183,47],[183,183,55],[207,207,111],[223,223,159],[239,239,199],[255,255,255]];
+      const plasma = fire.map(c => [c[2], c[1], c[0]]);
+      const toxic = fire.map(c => [c[2], c[0], c[1]]);
+      const ember = fire.map(c => [c[0], Math.floor(c[1]*0.4), Math.floor(c[2]*0.7)]);
+      this.palettes = [fire, plasma, toxic, ember];
+      this.paletteIdx = 0;
+
+      // Offscreen pixel buffer
+      this.off = document.createElement('canvas');
+      this.off.width = this.W; this.off.height = this.H;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.W, this.H);
+    }
+    onClick() {
+      this.paletteIdx = (this.paletteIdx + 1) % this.palettes.length;
+    }
+    update() {
+      const W = this.W, H = this.H, buf = this.buffer;
+      for (let y = 1; y < H; y++) {
+        for (let x = 0; x < W; x++) {
+          const src = y * W + x;
+          const pixel = buf[src];
+          if (pixel === 0) {
+            buf[src - W] = 0;
+          } else {
+            const rand = (Math.random() * 4) | 0;
+            const dstX = x - rand + 1;
+            if (dstX >= 0 && dstX < W) {
+              buf[(y-1) * W + dstX] = Math.max(0, pixel - (rand & 1));
+            }
+          }
+        }
+      }
+    }
+    render() {
+      const palette = this.palettes[this.paletteIdx];
+      const data = this.imgData.data;
+      const max = palette.length - 1;
+      for (let i = 0; i < this.W * this.H; i++) {
+        const c = palette[Math.min(this.buffer[i], max)];
+        const j = i * 4;
+        data[j] = c[0]; data[j+1] = c[1]; data[j+2] = c[2]; data[j+3] = 255;
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.imageSmoothingEnabled = false;
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+    }
+  }
+
+  // ============================================================
+  //   002 · BOIDS
+  // ============================================================
+  class BoidsEffect extends Effect {
+    init() {
+      this.boids = [];
+      this.N = 140;
+      // Note: this.w/this.h are set by _setSize() before init()
+      const W = this.w || 540, H = this.h || 405;
+      for (let i = 0; i < this.N; i++) {
+        this.boids.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+        });
+      }
+    }
+    onResize() {
+      // Keep boids inside the (possibly resized) canvas
+      if (!this.boids) return;
+      for (const b of this.boids) {
+        if (b.x > this.w) b.x = b.x % this.w;
+        if (b.y > this.h) b.y = b.y % this.h;
+      }
+    }
+    update() {
+      const NEAR = 50, CLOSE = 16;
+      const W = this.w, H = this.h;
+      for (const b of this.boids) {
+        let avx=0, avy=0, cx=0, cy=0, sx=0, sy=0, n=0;
+        for (const o of this.boids) {
+          if (o === b) continue;
+          const dx = o.x - b.x, dy = o.y - b.y;
+          const d2 = dx*dx + dy*dy;
+          if (d2 < NEAR*NEAR) {
+            avx += o.vx; avy += o.vy;
+            cx += o.x; cy += o.y;
+            n++;
+            if (d2 < CLOSE*CLOSE && d2 > 0) {
+              const d = Math.sqrt(d2);
+              sx -= dx / d; sy -= dy / d;
+            }
+          }
+        }
+        if (n > 0) {
+          avx /= n; avy /= n;
+          b.vx += (avx - b.vx) * 0.04;
+          b.vy += (avy - b.vy) * 0.04;
+          cx /= n; cy /= n;
+          b.vx += (cx - b.x) * 0.0008;
+          b.vy += (cy - b.y) * 0.0008;
+        }
+        b.vx += sx * 0.06; b.vy += sy * 0.06;
+
+        // Mouse repels
+        if (this.mx !== null) {
+          const dx = b.x - this.mx, dy = b.y - this.my;
+          const d2 = dx*dx + dy*dy;
+          if (d2 < 80*80 && d2 > 0) {
+            const d = Math.sqrt(d2);
+            const f = (80 - d) / 80;
+            b.vx += dx/d * f * 1.2;
+            b.vy += dy/d * f * 1.2;
+          }
+        }
+
+        const sp = Math.hypot(b.vx, b.vy);
+        if (sp > 2.4) { b.vx = b.vx/sp*2.4; b.vy = b.vy/sp*2.4; }
+        if (sp < 0.8 && sp > 0) { b.vx = b.vx/sp*0.8; b.vy = b.vy/sp*0.8; }
+
+        b.x += b.vx; b.y += b.vy;
+        if (b.x < 0) b.x += W; if (b.x > W) b.x -= W;
+        if (b.y < 0) b.y += H; if (b.y > H) b.y -= H;
+      }
+    }
+    render() {
+      const ctx = this.ctx;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, this.w, this.h);
+      ctx.fillStyle = ACCENT;
+      for (const b of this.boids) {
+        const a = Math.atan2(b.vy, b.vx);
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        ctx.rotate(a);
+        ctx.beginPath();
+        ctx.moveTo(5, 0);
+        ctx.lineTo(-3, 2.5);
+        ctx.lineTo(-3, -2.5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+  }
+
+  // ============================================================
+  //   003 · VERLET ROPE
+  // ============================================================
+  class RopeEffect extends Effect {
+    init() {
+      this.N = 40;
+      this.nodes = [];
+      this.linkLen = 9;
+      this.gravity = 0.4;
+      const W = this.w || 540;
+      for (let i = 0; i < this.N; i++) {
+        const x = W * 0.5;
+        const y = 20 + i * this.linkLen;
+        this.nodes.push({ x, y, px: x, py: y });
+      }
+    }
+    onResize() {
+      // Rebuild rope if width changed dramatically
+      if (!this.nodes || this.nodes.length === 0) {
+        const W = this.w;
+        for (let i = 0; i < this.N; i++) {
+          const x = W * 0.5;
+          const y = 20 + i * this.linkLen;
+          this.nodes.push({ x, y, px: x, py: y });
+        }
+      }
+    }
+    update() {
+      const g = this.gravity;
+      // Verlet step
+      for (const n of this.nodes) {
+        const vx = (n.x - n.px) * 0.995;
+        const vy = (n.y - n.py) * 0.995;
+        n.px = n.x; n.py = n.y;
+        n.x += vx; n.y += vy + g;
+      }
+      // Pin: follow mouse if hovering, else gentle Lissajous so rope keeps swinging
+      let pinX, pinY;
+      if (this.mx !== null) {
+        pinX = Math.max(20, Math.min(this.w - 20, this.mx));
+        pinY = Math.max(20, Math.min(this.h - 80, this.my));
+      } else {
+        const t = this.tick * 0.014;
+        pinX = this.w * 0.5 + Math.sin(t) * this.w * 0.30;
+        pinY = 32 + Math.sin(t * 1.7) * 14;
+      }
+      this.nodes[0].x = pinX; this.nodes[0].y = pinY;
+
+      // Constraint relaxation
+      for (let iter = 0; iter < 8; iter++) {
+        for (let i = 1; i < this.N; i++) {
+          const a = this.nodes[i-1], b = this.nodes[i];
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const d = Math.hypot(dx, dy) || 0.001;
+          const diff = (d - this.linkLen) / d;
+          if (i === 1) {
+            b.x -= dx * diff;
+            b.y -= dy * diff;
+          } else {
+            const half = diff * 0.5;
+            a.x += dx * half; a.y += dy * half;
+            b.x -= dx * half; b.y -= dy * half;
+          }
+        }
+        this.nodes[0].x = pinX; this.nodes[0].y = pinY;
+      }
+    }
+    render() {
+      const ctx = this.ctx;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, this.w, this.h);
+
+      // Rope — thicker, accent-tinted
+      ctx.strokeStyle = '#d68a5a';
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(this.nodes[0].x, this.nodes[0].y);
+      for (let i = 1; i < this.N; i++) {
+        ctx.lineTo(this.nodes[i].x, this.nodes[i].y);
+      }
+      ctx.stroke();
+
+      // Subtle node dots so the chain reads as articulated
+      ctx.fillStyle = 'rgba(244, 241, 234, 0.35)';
+      for (let i = 1; i < this.N - 1; i++) {
+        ctx.beginPath();
+        ctx.arc(this.nodes[i].x, this.nodes[i].y, 1.2, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      // Pin (where it's attached)
+      const pin = this.nodes[0];
+      ctx.fillStyle = ACCENT;
+      ctx.beginPath();
+      ctx.arc(pin.x, pin.y, 5, 0, Math.PI*2);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255, 126, 61, 0.3)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(pin.x, pin.y, 10, 0, Math.PI*2);
+      ctx.stroke();
+
+      // Bob — halo + solid
+      const last = this.nodes[this.N-1];
+      ctx.fillStyle = 'rgba(255, 126, 61, 0.18)';
+      ctx.beginPath();
+      ctx.arc(last.x, last.y, 16, 0, Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle = ACCENT;
+      ctx.beginPath();
+      ctx.arc(last.x, last.y, 9, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  // ============================================================
+  //   PERLIN NOISE (shared)
+  // ============================================================
+  function makePerlin(seed = 1) {
+    const p = [];
+    for (let i = 0; i < 256; i++) p.push(i);
+    let s = seed;
+    const rand = () => { s = (s * 16807) % 2147483647; return s / 2147483647; };
+    for (let i = 255; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [p[i], p[j]] = [p[j], p[i]];
+    }
+    const perm = new Uint8Array(512);
+    for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
+    const fade = t => t*t*t*(t*(t*6 - 15) + 10);
+    const lerp = (a, b, t) => a + t*(b - a);
+    const grad = (h, x, y) => {
+      const v = (h & 3);
+      const u = v < 2 ? x : y;
+      const w = v < 2 ? y : x;
+      return ((v & 1) ? -u : u) + ((v & 2) ? -w : w);
+    };
+    return (x, y) => {
+      const X = Math.floor(x) & 255;
+      const Y = Math.floor(y) & 255;
+      x -= Math.floor(x); y -= Math.floor(y);
+      const u = fade(x), v = fade(y);
+      const A = perm[X] + Y, B = perm[X+1] + Y;
+      return lerp(
+        lerp(grad(perm[A], x, y), grad(perm[B], x-1, y), u),
+        lerp(grad(perm[A+1], x, y-1), grad(perm[B+1], x-1, y-1), u),
+        v
+      );
+    };
+  }
+
+  // ============================================================
+  //   004 · PERLIN FLOW FIELD
+  // ============================================================
+  class FlowEffect extends Effect {
+    init() {
+      this.reseed();
+      this.particles = [];
+      this.N = 600;
+      for (let i = 0; i < this.N; i++) this.particles.push(this._spawn());
+      this.firstFrame = true;
+    }
+    onClick() { this.reseed(); }
+    reseed() {
+      this.noise = makePerlin(Math.floor(Math.random() * 1e6));
+      this.firstFrame = true;
+    }
+    _spawn() {
+      return {
+        x: Math.random() * this.w,
+        y: Math.random() * this.h,
+        age: Math.random() * 200,
+        maxAge: 100 + Math.random() * 200,
+      };
+    }
+    update() {
+      const SCALE = 0.0035;
+      const SPEED = 0.9;
+      for (const p of this.particles) {
+        const a = this.noise(p.x * SCALE, p.y * SCALE + this.tick * 0.0015) * Math.PI * 2;
+        p.x += Math.cos(a) * SPEED;
+        p.y += Math.sin(a) * SPEED;
+        p.age++;
+        if (p.x < 0 || p.x > this.w || p.y < 0 || p.y > this.h || p.age > p.maxAge) {
+          Object.assign(p, this._spawn());
+          p.age = 0;
+        }
+      }
+    }
+    render() {
+      const ctx = this.ctx;
+      if (this.firstFrame) {
+        ctx.fillStyle = BG;
+        ctx.fillRect(0, 0, this.w, this.h);
+        this.firstFrame = false;
+      } else {
+        ctx.fillStyle = 'rgba(10, 10, 12, 0.04)';
+        ctx.fillRect(0, 0, this.w, this.h);
+      }
+      ctx.fillStyle = ACCENT;
+      for (const p of this.particles) {
+        const alpha = Math.min(1, (p.maxAge - p.age) / 60) * 0.7;
+        ctx.globalAlpha = alpha;
+        ctx.fillRect(p.x, p.y, 1.2, 1.2);
+      }
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // ============================================================
+  //   005 · DIAMOND-SQUARE TERRAIN
+  // ============================================================
+  class TerrainEffect extends Effect {
+    init() {
+      this.SIZE = 129;
+      this.heights = new Float32Array(this.SIZE * this.SIZE);
+      this.off = document.createElement('canvas');
+      this.off.width = this.SIZE; this.off.height = this.SIZE;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.SIZE, this.SIZE);
+      this.regenerate();
+      this.cycleAt = 360; // ~6s at 60fps
+    }
+    onClick() { this.regenerate(); }
+    regenerate() {
+      const SIZE = this.SIZE;
+      const h = this.heights;
+      h.fill(0);
+      h[0] = Math.random() * 2 - 1;
+      h[SIZE-1] = Math.random() * 2 - 1;
+      h[(SIZE-1)*SIZE] = Math.random() * 2 - 1;
+      h[SIZE*SIZE - 1] = Math.random() * 2 - 1;
+      let step = SIZE - 1;
+      let scale = 1;
+      while (step > 1) {
+        const half = step >> 1;
+        // Diamond
+        for (let y = half; y < SIZE; y += step) {
+          for (let x = half; x < SIZE; x += step) {
+            const a = h[(y-half)*SIZE + (x-half)];
+            const b = h[(y-half)*SIZE + (x+half)];
+            const c = h[(y+half)*SIZE + (x-half)];
+            const d = h[(y+half)*SIZE + (x+half)];
+            h[y*SIZE + x] = (a+b+c+d) * 0.25 + (Math.random() - 0.5) * scale;
+          }
+        }
+        // Square
+        for (let y = 0; y < SIZE; y += half) {
+          const startX = ((y / half) & 1) === 0 ? half : 0;
+          for (let x = startX; x < SIZE; x += step) {
+            let sum = 0, count = 0;
+            if (x >= half) { sum += h[y*SIZE + (x-half)]; count++; }
+            if (x + half < SIZE) { sum += h[y*SIZE + (x+half)]; count++; }
+            if (y >= half) { sum += h[(y-half)*SIZE + x]; count++; }
+            if (y + half < SIZE) { sum += h[(y+half)*SIZE + x]; count++; }
+            h[y*SIZE + x] = sum / count + (Math.random() - 0.5) * scale;
+          }
+        }
+        step = half;
+        scale *= 0.55;
+      }
+      // Render once into imgData
+      this.renderHeights();
+      this.cycleAt = this.tick + 360;
+    }
+    renderHeights() {
+      const SIZE = this.SIZE;
+      const h = this.heights;
+      // Find min/max for normalization
+      let mn = Infinity, mx = -Infinity;
+      for (let i = 0; i < SIZE*SIZE; i++) { mn = Math.min(mn, h[i]); mx = Math.max(mx, h[i]); }
+      const range = mx - mn || 1;
+
+      // Lighting: dot product with light direction (in heightfield space)
+      const data = this.imgData.data;
+      const lx = -0.5, ly = -0.7, lz = 0.5;
+      const lLen = Math.hypot(lx, ly, lz);
+      const lnx = lx/lLen, lny = ly/lLen, lnz = lz/lLen;
+
+      for (let y = 0; y < SIZE; y++) {
+        for (let x = 0; x < SIZE; x++) {
+          const i = y*SIZE + x;
+          const hv = (h[i] - mn) / range; // 0..1
+
+          // Compute slope-based normal
+          const xL = x > 0 ? h[i-1] : h[i];
+          const xR = x < SIZE-1 ? h[i+1] : h[i];
+          const yU = y > 0 ? h[i-SIZE] : h[i];
+          const yD = y < SIZE-1 ? h[i+SIZE] : h[i];
+          const dx = (xR - xL);
+          const dy = (yD - yU);
+          // Normal is (-dx, -dy, scale_factor); normalize
+          const nz = 0.05;
+          const nLen = Math.hypot(dx, dy, nz);
+          const nx = -dx/nLen, ny_ = -dy/nLen, nzn = nz/nLen;
+          const dot = Math.max(0, nx*lnx + ny_*lny + nzn*lnz);
+
+          // Color ramp: water -> beach -> grass -> rock -> snow
+          let r, g, b;
+          if (hv < 0.32) {
+            const t = hv / 0.32;
+            r = 18 + t*22; g = 28 + t*42; b = 52 + t*60;
+          } else if (hv < 0.38) {
+            const t = (hv - 0.32) / 0.06;
+            r = 40 + t*120; g = 70 + t*100; b = 112 - t*48;
+          } else if (hv < 0.6) {
+            const t = (hv - 0.38) / 0.22;
+            r = 160 - t*90; g = 170 - t*70; b = 64 - t*20;
+          } else if (hv < 0.78) {
+            const t = (hv - 0.6) / 0.18;
+            r = 70 + t*60; g = 100 + t*50; b = 44 + t*60;
+          } else {
+            const t = Math.min(1, (hv - 0.78) / 0.22);
+            r = 130 + t*125; g = 150 + t*105; b = 104 + t*150;
+          }
+
+          // Apply shading
+          const shade = 0.4 + 0.6 * dot;
+          r = Math.min(255, r * shade);
+          g = Math.min(255, g * shade);
+          b = Math.min(255, b * shade);
+
+          const j = i * 4;
+          data[j] = r; data[j+1] = g; data[j+2] = b; data[j+3] = 255;
+        }
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+    }
+    update() {
+      if (this.tick > this.cycleAt) this.regenerate();
+    }
+    render() {
+      this.ctx.imageSmoothingEnabled = true;
+      this.ctx.imageSmoothingQuality = 'high';
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+    }
+  }
+
+  // ============================================================
+  //   006 · MODE 7
+  // ============================================================
+  class Mode7Effect extends Effect {
+    init() {
+      this.RW = 360; this.RH = 200;
+      this.off = document.createElement('canvas');
+      this.off.width = this.RW; this.off.height = this.RH;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.RW, this.RH);
+      this.camZ = 0;
+      this.camX = 0;
+    }
+    update() {
+      this.camZ -= 0.6;
+      this.camX = Math.sin(this.tick * 0.004) * 4;
+    }
+    render() {
+      const RW = this.RW, RH = this.RH;
+      const horizon = RH * 0.46;
+      const data = this.imgData.data;
+
+      // Sky (gradient)
+      for (let y = 0; y < horizon; y++) {
+        const t = y / horizon;
+        const r = 18 + t*32;
+        const g = 16 + t*40;
+        const b = 24 + t*60;
+        for (let x = 0; x < RW; x++) {
+          const j = (y*RW + x) * 4;
+          data[j] = r; data[j+1] = g; data[j+2] = b; data[j+3] = 255;
+        }
+      }
+      // Sun
+      const sunY = horizon * 0.7, sunX = RW * 0.5;
+      for (let y = 0; y < horizon; y++) {
+        for (let x = 0; x < RW; x++) {
+          const dx = x - sunX, dy = y - sunY;
+          const d = Math.hypot(dx, dy);
+          if (d < 28) {
+            const t = 1 - d/28;
+            const j = (y*RW + x) * 4;
+            data[j]   = Math.min(255, data[j]   + 220*t*t);
+            data[j+1] = Math.min(255, data[j+1] + 130*t*t);
+            data[j+2] = Math.min(255, data[j+2] + 60*t*t);
+          }
+        }
+      }
+
+      // Ground (Mode 7)
+      const focal = RH * 0.35;
+      for (let y = horizon; y < RH; y++) {
+        const dy = y - horizon;
+        const worldZ = focal / dy * 6;
+        const scale = worldZ / focal;
+        // Fog factor based on depth
+        const fog = Math.min(1, dy / (RH - horizon) * 1.4);
+        for (let x = 0; x < RW; x++) {
+          const wx = (x - RW * 0.5) * scale + this.camX;
+          const wz = worldZ + this.camZ;
+          // Checkerboard 6 units
+          const cx = Math.floor(wx / 6);
+          const cz = Math.floor(wz / 6);
+          let r, g, b;
+          if (((cx + cz) & 1) === 0) {
+            r = 30; g = 32; b = 40;
+          } else {
+            r = 70; g = 56; b = 44;
+          }
+          // Faint accent stripe every 30 units
+          if (Math.abs((wz % 60) - 30) < 0.5) {
+            r = 255; g = 126; b = 61;
+          }
+          // Apply fog (fade to sky bg)
+          r = r * fog + 28 * (1-fog);
+          g = g * fog + 30 * (1-fog);
+          b = b * fog + 44 * (1-fog);
+
+          const j = (y*RW + x) * 4;
+          data[j] = r; data[j+1] = g; data[j+2] = b; data[j+3] = 255;
+        }
+      }
+
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.imageSmoothingEnabled = false;
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+    }
+  }
+
+  // ============================================================
+  //   007 · SPATIAL HASH COLLISION
+  // ============================================================
+  class HashEffect extends Effect {
+    init() {
+      this.N = 320;
+      this.r = 5;
+      this.cellSize = this.r * 2;
+      this.balls = [];
+      for (let i = 0; i < this.N; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const sp = 0.5 + Math.random() * 1.6;
+        this.balls.push({
+          x: Math.random() * 800,
+          y: Math.random() * 600,
+          vx: Math.cos(a) * sp,
+          vy: Math.sin(a) * sp,
+          id: i,
+        });
+      }
+      this.grid = new Map();
+    }
+    onClick(cx, cy) {
+      // Push balls outward
+      for (const b of this.balls) {
+        const dx = b.x - cx, dy = b.y - cy;
+        const d = Math.hypot(dx, dy);
+        if (d > 0 && d < 120) {
+          const f = (120 - d) / 120 * 6;
+          b.vx += dx/d * f;
+          b.vy += dy/d * f;
+        }
+      }
+    }
+    onResize() {
+      for (const b of this.balls) {
+        b.x = Math.min(Math.max(b.x, this.r), this.w - this.r);
+        b.y = Math.min(Math.max(b.y, this.r), this.h - this.r);
+      }
+    }
+    update() {
+      const r = this.r, W = this.w, H = this.h;
+      // Move + bounce
+      for (const b of this.balls) {
+        b.x += b.vx; b.y += b.vy;
+        if (b.x < r) { b.x = r; b.vx = Math.abs(b.vx); }
+        if (b.x > W-r) { b.x = W-r; b.vx = -Math.abs(b.vx); }
+        if (b.y < r) { b.y = r; b.vy = Math.abs(b.vy); }
+        if (b.y > H-r) { b.y = H-r; b.vy = -Math.abs(b.vy); }
+        // gentle damping
+        b.vx *= 0.999; b.vy *= 0.999;
+      }
+      // Build hash
+      this.grid.clear();
+      const cs = this.cellSize;
+      for (const b of this.balls) {
+        const cx = Math.floor(b.x / cs);
+        const cy = Math.floor(b.y / cs);
+        const k = cx * 100000 + cy;
+        let cell = this.grid.get(k);
+        if (!cell) { cell = []; this.grid.set(k, cell); }
+        cell.push(b);
+      }
+      // Resolve
+      const r2 = r * 2;
+      for (const b of this.balls) {
+        const cx = Math.floor(b.x / cs);
+        const cy = Math.floor(b.y / cs);
+        for (let dx = -1; dx <= 1; dx++) {
+          for (let dy = -1; dy <= 1; dy++) {
+            const cell = this.grid.get((cx+dx) * 100000 + (cy+dy));
+            if (!cell) continue;
+            for (const o of cell) {
+              if (o.id <= b.id) continue;
+              const ddx = o.x - b.x, ddy = o.y - b.y;
+              const d2 = ddx*ddx + ddy*ddy;
+              if (d2 > 0 && d2 < r2*r2) {
+                const d = Math.sqrt(d2);
+                const nx = ddx/d, ny = ddy/d;
+                const overlap = (r2 - d) * 0.5;
+                b.x -= nx * overlap; b.y -= ny * overlap;
+                o.x += nx * overlap; o.y += ny * overlap;
+                const va = b.vx*nx + b.vy*ny;
+                const vb = o.vx*nx + o.vy*ny;
+                const dv = vb - va;
+                b.vx += dv*nx; b.vy += dv*ny;
+                o.vx -= dv*nx; o.vy -= dv*ny;
+              }
+            }
+          }
+        }
+      }
+    }
+    render() {
+      const ctx = this.ctx;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, this.w, this.h);
+      ctx.fillStyle = ACCENT;
+      for (const b of this.balls) {
+        const sp = Math.hypot(b.vx, b.vy);
+        const t = Math.min(1, sp / 3);
+        ctx.fillStyle = `rgba(255, 126, 61, ${0.4 + t*0.6})`;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, this.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+  }
+
+  // ============================================================
+  //   008 · CRITICALLY DAMPED SPRING vs LERP
+  // ============================================================
+  class SpringEffect extends Effect {
+    init() {
+      this.lerp = { x: 0, y: 0 };
+      this.spring = { x: 0, y: 0, vx: 0, vy: 0 };
+      this.target = { x: 0, y: 0 };
+      this.targetT = 0;
+      this.trails = { lerp: [], spring: [] };
+      this.MAX_TRAIL = 40;
+    }
+    onResize() {
+      this.lerp.x = this.w * 0.5;
+      this.lerp.y = this.h * 0.5;
+      this.spring.x = this.w * 0.5;
+      this.spring.y = this.h * 0.5;
+      this.target.x = this.w * 0.5;
+      this.target.y = this.h * 0.5;
+    }
+    update() {
+      // Target: cursor if available, else animated path
+      if (this.mx !== null) {
+        this.target.x = this.mx;
+        this.target.y = this.my;
+      } else {
+        this.targetT += 0.012;
+        this.target.x = this.w * 0.5 + Math.cos(this.targetT * 1.3) * this.w * 0.3;
+        this.target.y = this.h * 0.5 + Math.sin(this.targetT * 1.7) * this.h * 0.25;
+      }
+
+      // Linear lerp
+      const k = 0.08;
+      this.lerp.x += (this.target.x - this.lerp.x) * k;
+      this.lerp.y += (this.target.y - this.lerp.y) * k;
+
+      // Critically damped spring (semi-implicit, omega=0.18 ish)
+      const omega = 0.22;
+      const ax = (this.target.x - this.spring.x) * omega * omega - 2 * omega * this.spring.vx;
+      const ay = (this.target.y - this.spring.y) * omega * omega - 2 * omega * this.spring.vy;
+      this.spring.vx += ax;
+      this.spring.vy += ay;
+      this.spring.x += this.spring.vx;
+      this.spring.y += this.spring.vy;
+
+      // Update trails
+      this.trails.lerp.push({ x: this.lerp.x, y: this.lerp.y });
+      this.trails.spring.push({ x: this.spring.x, y: this.spring.y });
+      if (this.trails.lerp.length > this.MAX_TRAIL) this.trails.lerp.shift();
+      if (this.trails.spring.length > this.MAX_TRAIL) this.trails.spring.shift();
+    }
+    render() {
+      const ctx = this.ctx;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, this.w, this.h);
+
+      // Labels
+      ctx.font = '10px JetBrains Mono';
+      ctx.fillStyle = '#5a5650';
+      ctx.fillText('LERP (0.08)', 16, 22);
+      ctx.fillStyle = ACCENT;
+      ctx.fillText('CRITICALLY DAMPED SPRING', 16, 38);
+
+      // Target crosshair
+      ctx.strokeStyle = 'rgba(244, 241, 234, 0.18)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(this.target.x, this.target.y, 14, 0, Math.PI*2);
+      ctx.moveTo(this.target.x - 18, this.target.y);
+      ctx.lineTo(this.target.x + 18, this.target.y);
+      ctx.moveTo(this.target.x, this.target.y - 18);
+      ctx.lineTo(this.target.x, this.target.y + 18);
+      ctx.stroke();
+
+      // Lerp trail
+      this._drawTrail(this.trails.lerp, '#5a5650', 'rgba(90, 86, 80, 0.5)');
+      // Spring trail
+      this._drawTrail(this.trails.spring, ACCENT, 'rgba(255, 126, 61, 0.5)');
+
+      // Lerp dot
+      ctx.fillStyle = '#5a5650';
+      ctx.beginPath();
+      ctx.arc(this.lerp.x, this.lerp.y, 5, 0, Math.PI*2);
+      ctx.fill();
+
+      // Spring dot
+      ctx.fillStyle = ACCENT;
+      ctx.beginPath();
+      ctx.arc(this.spring.x, this.spring.y, 7, 0, Math.PI*2);
+      ctx.fill();
+    }
+    _drawTrail(trail, color, faint) {
+      if (trail.length < 2) return;
+      const ctx = this.ctx;
+      ctx.strokeStyle = faint;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let i = 0; i < trail.length; i++) {
+        const p = trail[i];
+        if (i === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+      ctx.stroke();
+    }
+  }
+
+  // ============================================================
+  //   009 · SDF BLOBS
+  // ============================================================
+  class SDFEffect extends Effect {
+    init() {
+      this.RW = 200; this.RH = 150;
+      this.off = document.createElement('canvas');
+      this.off.width = this.RW; this.off.height = this.RH;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.RW, this.RH);
+      this.blobs = [];
+      for (let i = 0; i < 5; i++) {
+        this.blobs.push({
+          x: 0.3 + 0.4 * Math.random(),
+          y: 0.3 + 0.4 * Math.random(),
+          r: 12 + Math.random() * 12,
+          ang: Math.random() * Math.PI * 2,
+          spd: 0.4 + Math.random() * 0.8,
+          phase: Math.random() * 100,
+        });
+      }
+    }
+    update() {
+      // Animate blob positions
+      const t = this.tick * 0.005;
+      for (let i = 0; i < this.blobs.length; i++) {
+        const b = this.blobs[i];
+        b.tx = (0.5 + Math.cos(t * b.spd + b.phase) * 0.3) * this.RW;
+        b.ty = (0.5 + Math.sin(t * b.spd * 1.3 + b.phase * 1.7) * 0.3) * this.RH;
+      }
+      // First blob follows mouse if hovering
+      if (this.mx !== null) {
+        const tx = (this.mx / this.w) * this.RW;
+        const ty = (this.my / this.h) * this.RH;
+        this.blobs[0].tx = tx;
+        this.blobs[0].ty = ty;
+      }
+    }
+    render() {
+      const RW = this.RW, RH = this.RH;
+      const data = this.imgData.data;
+      const blobs = this.blobs;
+      const SMOOTH_K = 18;
+
+      function smin(a, b, k) {
+        const h = Math.max(k - Math.abs(a - b), 0) / k;
+        return Math.min(a, b) - h * h * k * 0.25;
+      }
+
+      for (let y = 0; y < RH; y++) {
+        for (let x = 0; x < RW; x++) {
+          let d = 1e9;
+          for (let i = 0; i < blobs.length; i++) {
+            const b = blobs[i];
+            const dx = x - b.tx, dy = y - b.ty;
+            const dd = Math.sqrt(dx*dx + dy*dy) - b.r;
+            d = smin(d, dd, SMOOTH_K);
+          }
+          const idx = (y * RW + x) * 4;
+          let r, g, b_;
+          if (d < 0) {
+            // Inside: amber gradient based on depth
+            const t = Math.min(1, -d / 30);
+            r = 255; g = 126 - t*40; b_ = 61 - t*40;
+          } else if (d < 1.2) {
+            // Edge highlight
+            r = 255; g = 200; b_ = 140;
+          } else {
+            // Outside: contour rings
+            const ring = Math.sin(d * 0.35) * 0.5 + 0.5;
+            const fade = Math.max(0, 1 - d / 60);
+            const v = ring * fade * 28;
+            r = 12 + v; g = 12 + v * 0.6; b_ = 14 + v * 0.4;
+          }
+          data[idx] = r; data[idx+1] = g; data[idx+2] = b_; data[idx+3] = 255;
+        }
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.imageSmoothingEnabled = true;
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+    }
+  }
+
+  // ============================================================
+  //   BOOTSTRAP — instantiate, observe, run on visibility
+  // ============================================================
+  const REGISTRY = {
+    fire: FireEffect,
+    boids: BoidsEffect,
+    rope: RopeEffect,
+    flow: FlowEffect,
+    terrain: TerrainEffect,
+    mode7: Mode7Effect,
+    hash: HashEffect,
+    spring: SpringEffect,
+    sdf: SDFEffect,
+  };
+
+  const instances = [];
+  document.querySelectorAll('canvas[data-effect]').forEach(c => {
+    const cls = REGISTRY[c.dataset.effect];
+    if (!cls) return;
+    const inst = new cls(c);
+    instances.push(inst);
+  });
+
+  // Use IntersectionObserver to pause off-screen effects (perf)
+  const io = new IntersectionObserver(entries => {
+    for (const e of entries) {
+      const inst = instances.find(i => i.canvas === e.target);
+      if (!inst) continue;
+      if (e.isIntersecting) inst.start();
+      else inst.stop();
+    }
+  }, { threshold: 0.05 });
+
+  for (const inst of instances) io.observe(inst.canvas);
+</script>
+
+</body>
+</html>
