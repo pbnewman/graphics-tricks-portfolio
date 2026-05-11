@@ -368,6 +368,33 @@
     color: var(--fg);
   }
 
+  .footer-avatar {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    align-self: center;
+    transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .footer-avatar:hover {
+    border-color: var(--accent);
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px rgba(255, 126, 61, 0.12);
+  }
+  .footer-avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
   /* ===== Responsive ===== */
   @media (max-width: 760px) {
     .page { padding: 0 20px; }
@@ -480,7 +507,7 @@
         <canvas data-effect="rope"></canvas>
         <div class="canvas-overlay">
           <div class="top">
-            <span>40 nodes · 39 constraints</span>
+            <span>22 nodes · 21 constraints</span>
             <span class="live">Settling</span>
           </div>
           <div class="bot">
@@ -634,12 +661,12 @@
         <canvas data-effect="spring"></canvas>
         <div class="canvas-overlay">
           <div class="top">
-            <span>linear vs critically damped</span>
+            <span></span>
             <span class="live">Tracking</span>
           </div>
           <div class="bot">
             <span>lerp arrives flat · spring arrives soft</span>
-            <span></span>
+            <span>linear vs critically damped</span>
           </div>
         </div>
       </div>
@@ -752,9 +779,44 @@
       <p class="specimen-hint">Click to reseed the field.</p>
     </article>
 
-    <article class="specimen featured">
+    <article class="specimen">
       <div class="specimen-head">
         <span class="specimen-num">012</span>
+        <span>Conway</span>
+        <span class="sep"></span>
+        <span>1970</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 70 lines</span>
+      </div>
+      <div class="canvas-frame pixelated">
+        <canvas data-effect="life"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>128 × 96 grid · 2 gen/frame</span>
+            <span class="live">Evolving</span>
+          </div>
+          <div class="bot">
+            <span>B3/S23 · toroidal wrap</span>
+            <span>3 rules · Turing-complete</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Conway's Game of <em>Life</em></h2>
+      <p class="specimen-desc">
+        Three rules on a square grid: a live cell with two or three live neighbors stays
+        alive, a dead cell with exactly three live neighbors flickers on, everyone else
+        dies. Out of that handful of arithmetic you get
+        <em style="color: var(--accent); font-style: italic;">gliders</em>, pulsars, glider
+        guns, an entire ecology of patterns &mdash; and a proof that this two-state grid is
+        Turing-complete. The original demonstration that complexity is just simplicity
+        compounded.
+      </p>
+      <p class="specimen-hint">Click to reseed.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">013</span>
         <span>Harris · Stam · Wong</span>
         <span class="sep"></span>
         <span>2000s&ndash;</span>
@@ -784,6 +846,254 @@
         millions of cells per frame.
       </p>
       <p class="specimen-hint">Drag the canvas to paint with fluid.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">014</span>
+        <span>Turing · Pearson</span>
+        <span class="sep"></span>
+        <span>1952&ndash;1993</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 30 lines</span>
+        <span class="sep"></span>
+        <span>Pattern formation</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="reaction"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>192 × 192 grid</span>
+            <span class="live">Forming</span>
+          </div>
+          <div class="bot">
+            <span>Gray&ndash;Scott · feed/kill reaction</span>
+            <span>5 preset families</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Reaction&ndash;<em>diffusion</em></h2>
+      <p class="specimen-desc">
+        Two chemicals diffuse across a grid; <em style="color: var(--accent); font-style: italic;">B</em>
+        autocatalytically converts <em style="color: var(--accent); font-style: italic;">A</em> into more
+        <em style="color: var(--accent); font-style: italic;">B</em>. With the right feed and kill rates,
+        uniform soup self-organizes into leopard spots, fingerprints, coral, labyrinths &mdash; patterns
+        that look unmistakably biological. Turing wrote the math in 1952; tweak two numbers and the same
+        thirty lines produce five different worlds.
+      </p>
+      <p class="specimen-hint">Click to cycle through pattern presets.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">015</span>
+        <span>Lorenz · Aizawa · Halvorsen · Thomas</span>
+        <span class="sep"></span>
+        <span>1963&ndash;</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 35 lines</span>
+        <span class="sep"></span>
+        <span>Chaotic dynamics</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="attractor"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>3 ODEs · single point</span>
+            <span class="live">Tracing</span>
+          </div>
+          <div class="bot">
+            <span>phase-space trajectory · never repeating</span>
+            <span>4 families · click to switch</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Strange <em>attractors</em></h2>
+      <p class="specimen-desc">
+        A point in 3D space follows three lines of differential equations and traces a
+        <em style="color: var(--accent); font-style: italic;">never-repeating</em> orbit that is
+        nevertheless confined forever to an intricate shape. Lorenz published the first in 1963
+        as a stripped-down model of atmospheric convection; the butterfly silhouette that emerged
+        became the icon of chaos theory and the reason we got the phrase "sensitive dependence
+        on initial conditions."
+      </p>
+      <p class="specimen-hint">Click to cycle attractor families.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">016</span>
+        <span>Witten &amp; Sander</span>
+        <span class="sep"></span>
+        <span>1981</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 60 lines</span>
+        <span class="sep"></span>
+        <span>Stochastic growth</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="dla"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>220 × 220 grid · 16 walkers</span>
+            <span class="live">Aggregating</span>
+          </div>
+          <div class="bot">
+            <span>random walk · 4-neighbor adhesion</span>
+            <span>fractal dimension ≈ 1.71</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Diffusion-limited <em>aggregation</em></h2>
+      <p class="specimen-desc">
+        A single sticky seed at the center. Random walkers spawn just outside the cluster
+        and Brownian-walk until they touch a fixed particle &mdash; whereupon they freeze.
+        Out of pure noise grows the universal dendrite: the silhouette of frost on glass,
+        copper electrodeposition, lightning in a Lichtenberg block, coral. The fingers
+        grow because the tips reach incoming walkers first &mdash; a runaway that's literally
+        called the <em style="color: var(--accent); font-style: italic;">Mullins&ndash;Sekerka instability</em>.
+      </p>
+      <p class="specimen-hint">Click to start a new colony.</p>
+    </article>
+
+    <article class="specimen">
+      <div class="specimen-head">
+        <span class="specimen-num">017</span>
+        <span>Lindenmayer</span>
+        <span class="sep"></span>
+        <span>1968</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 50 lines</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="lsystem"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>axiom + rule + turtle</span>
+            <span class="live">Growing</span>
+          </div>
+          <div class="bot">
+            <span>4 systems · cycling</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">L-<em>systems</em></h2>
+      <p class="specimen-desc">
+        Start with a single character. A rule rewrites each character into a longer string.
+        Repeat four or five times and you have thousands of characters; feed them to a turtle
+        that draws, turns, pushes, and pops, and a fractal plant assembles itself. Lindenmayer
+        invented it to model algae growth &mdash; the same machinery now grows every procedural
+        forest in every game.
+      </p>
+      <p class="specimen-hint">Click to cycle systems.</p>
+    </article>
+
+    <article class="specimen">
+      <div class="specimen-head">
+        <span class="specimen-num">018</span>
+        <span>Vogel</span>
+        <span class="sep"></span>
+        <span>1979</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 15 lines</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="phyllotaxis"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>1200 seeds</span>
+            <span class="live">Packing</span>
+          </div>
+          <div class="bot">
+            <span>angle = n · 137.5077°</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title"><em>Phyllotaxis</em></h2>
+      <p class="specimen-desc">
+        Place the n-th seed at radius <code style="font-family: var(--mono); color: var(--accent);">√n</code>
+        and angle <code style="font-family: var(--mono); color: var(--accent);">n · 137.5°</code>. Any other angle and
+        you get awkward spokes and gaps; the golden angle &mdash; an irrational fraction of a turn &mdash; is the only
+        rotation no integer ever lands twice on, so nothing ever overlaps. Sunflowers, pinecones, and pineapples all
+        solve this packing problem the same way.
+      </p>
+      <p class="specimen-hint">Click to compare angles.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">019</span>
+        <span>Gumin</span>
+        <span class="sep"></span>
+        <span>2016</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 130 lines</span>
+        <span class="sep"></span>
+        <span>Constraint propagation</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="wfc"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>70 × 30 grid · 16-tile alphabet</span>
+            <span class="live">Collapsing</span>
+          </div>
+          <div class="bot">
+            <span>min-entropy heuristic · edge-match constraints</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Wave function <em>collapse</em></h2>
+      <p class="specimen-desc">
+        Every cell starts holding all sixteen possible tiles superposed. Find the cell with
+        the fewest remaining options, randomly pick one of them, then propagate the consequences:
+        any neighbor still holding a tile whose edge doesn't match must drop it &mdash; and those
+        drops cascade outward in turn. The Sudoku trick, weaponized for procedural worlds. You
+        can watch the certainty wave radiate across the grid in real time.
+      </p>
+      <p class="specimen-hint">Click to regenerate.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">020</span>
+        <span>McNamara &amp; Zanetti</span>
+        <span class="sep"></span>
+        <span>1988</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 130 lines</span>
+        <span class="sep"></span>
+        <span>Lattice fluid</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="lbm"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>D2Q9 lattice · 280 × 80</span>
+            <span class="live">Shedding</span>
+          </div>
+          <div class="bot">
+            <span>collide · stream · bounce-back</span>
+            <span>Re ≈ 140 · 8k tracer particles</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Lattice <em>Boltzmann</em></h2>
+      <p class="specimen-desc">
+        Instead of solving Navier&ndash;Stokes directly, you store at each grid cell a tiny
+        distribution of fictitious particles streaming in nine directions, and apply two
+        rules per tick: <em style="color: var(--accent); font-style: italic;">collide</em>
+        (relax toward equilibrium) and <em style="color: var(--accent); font-style: italic;">stream</em>
+        (shift each direction's population by one cell). Add two obstacles in the channel,
+        seed thousands of massless tracers tagged by their starting height, and the
+        Kármán vortex street paints itself in rainbow &mdash; each color a streamline,
+        each wiggle the periodic shedding that trails every smokestack and lighthouse
+        at the same lazy rhythm regardless of scale.
+      </p>
+      <p class="specimen-hint">Click to give the flow a kick.</p>
     </article>
 
   </section>
@@ -833,11 +1143,37 @@
         </p>
       </div>
 
+      <div class="seealso-item">
+        <h3>Premultiplied alpha</h3>
+        <p>
+          Store color × alpha together instead of keeping them separate. Compositing
+          collapses to a single multiply-add with no divides, and the dark-fringe halo
+          around alpha-blended sprites simply vanishes. Pixar's RenderMan used it for
+          decades; every <code style="color: var(--accent);">&lt;canvas&gt;</code> on the
+          web composites this way and almost nobody notices.
+        </p>
+      </div>
+
+      <div class="seealso-item">
+        <h3>Schlick's Fresnel approximation</h3>
+        <p>
+          The real Fresnel equation involves trig and complex numbers. Christophe Schlick
+          noticed in 1994 that <code style="color: var(--accent);">F₀ + (1−F₀)(1−cosθ)⁵</code>
+          is visually indistinguishable across the angles that matter. One pow, no trig.
+          Every metallic surface in every PBR renderer shipping today runs this line.
+        </p>
+      </div>
+
     </div>
   </section>
 
   <footer>
-    <div>A field guide · <em>compiled with care</em></div>
+    <div class="footer-left">
+      <em>created with care by</em>
+      <a href="https://github.com/pbnewman" target="_blank" rel="noopener" class="footer-avatar" aria-label="@pbnewman on GitHub">
+        <img src="https://github.com/pbnewman.png" alt="@pbnewman on GitHub" loading="lazy">
+      </a>
+    </div>
     <div>Open source ideas · public-domain math</div>
   </footer>
 
@@ -936,7 +1272,12 @@
       this.imgData = this.offCtx.createImageData(this.W, this.H);
     }
     onClick() {
+      // Cycle the palette AND blank the buffer so the fire visibly crackles
+      // back up from the bottom in the new color, the same way it does on
+      // first page load.
       this.paletteIdx = (this.paletteIdx + 1) % this.palettes.length;
+      this.buffer.fill(0);
+      for (let x = 0; x < this.W; x++) this.buffer[(this.H-1)*this.W + x] = 36;
     }
     update() {
       const W = this.W, H = this.H, buf = this.buffer;
@@ -1073,7 +1414,7 @@
   // ============================================================
   class RopeEffect extends Effect {
     init() {
-      this.N = 40;
+      this.N = 22;
       this.nodes = [];
       this.linkLen = 9;
       this.gravity = 0.4;
@@ -1422,7 +1763,7 @@
       this.camX = 0;
     }
     update() {
-      this.camZ -= 0.6;
+      this.camZ += 0.6;
       this.camX = Math.sin(this.tick * 0.004) * 4;
     }
     render() {
@@ -1457,7 +1798,8 @@
         }
       }
 
-      // Ground (Mode 7)
+      // Ground (Mode 7) — pure checker, no overlay stripe so the texture
+      // stays constant frame to frame.
       const focal = RH * 0.35;
       for (let y = horizon; y < RH; y++) {
         const dy = y - horizon;
@@ -1477,10 +1819,6 @@
           } else {
             r = 70; g = 56; b = 44;
           }
-          // Faint accent stripe every 30 units
-          if (Math.abs((wz % 60) - 30) < 0.5) {
-            r = 255; g = 126; b = 61;
-          }
           // Apply fog (fade to sky bg)
           r = r * fog + 28 * (1-fog);
           g = g * fog + 30 * (1-fog);
@@ -1492,6 +1830,92 @@
       }
 
       this.offCtx.putImageData(this.imgData, 0, 0);
+
+      // Mountain range — procedurally generated and projected with the same
+      // perspective as the ground. The camera has height 6 (implied by the
+      // ground formula worldZ = focal · 6 / dy), so a peak at world height H
+      // above the ground projects to screen_y = horizon - (H - 6) · focal / rel_z.
+      // Mountains are placed laterally on both sides of the road; as the
+      // camera advances they spread outward to the screen edges, creating
+      // the "driving through a pass" illusion. Positions are hashed by
+      // z-slot index so the same mountain reappears at the same spot if
+      // you scrolled back (impossible since we only go forward, but the
+      // procedural shape stays self-consistent rather than reshuffling
+      // every frame).
+      const mountainSpacing = 14;
+      const minDist = 4;
+      const maxDist = 180;
+      const sMin = Math.ceil((this.camZ + minDist) / mountainSpacing);
+      const sMax = Math.floor((this.camZ + maxDist) / mountainSpacing);
+
+      const mountains = [];
+      for (let s = sMin; s <= sMax; s++) {
+        // Deterministic hash → three pseudo-random values in [0, 1).
+        let h = ((s * 73856093) ^ 0x9e3779b9) >>> 0;
+        h = ((h ^ (h >>> 13)) * 0x85ebca6b) >>> 0;
+        h = (h ^ (h >>> 16)) >>> 0;
+        let h2 = ((s * 19349663) ^ 0xdeadbeef) >>> 0;
+        h2 = ((h2 ^ (h2 >>> 13)) * 0xc2b2ae35) >>> 0;
+        h2 = (h2 ^ (h2 >>> 16)) >>> 0;
+        const r1 = (h & 0xFFFF) / 0x10000;
+        const r2 = ((h >>> 16) & 0xFFFF) / 0x10000;
+        const r3 = (h2 & 0xFFFF) / 0x10000;
+
+        if (r1 < 0.32) continue;          // ~32% of slots empty (breaks up regularity)
+
+        const sideSign = r2 < 0.5 ? -1 : 1;
+        const wx = sideSign * (22 + r3 * 28);   // 22–50 units off the road centerline
+        const wz = s * mountainSpacing;
+        const peakH = 14 + r3 * 16;             // world height 14–30 (camera is at 6)
+        const baseW = 18 + r2 * 18;             // world base width 18–36
+
+        const rel_z = wz - this.camZ;
+        if (rel_z <= 0) continue;
+
+        const cx_screen = (wx - this.camX) * focal / rel_z + RW * 0.5;
+        const peak_y = horizon - (peakH - 6) * focal / rel_z;
+        const half_w = baseW * focal / rel_z * 0.5;
+
+        // Cull if entirely off-screen horizontally or if peak fails to clear horizon
+        if (cx_screen + half_w < 0 || cx_screen - half_w > RW) continue;
+        if (peak_y >= horizon) continue;
+
+        mountains.push({ cx: cx_screen, peakY: peak_y, halfW: half_w, z: rel_z });
+      }
+
+      // Render far-to-near so closer mountains overlap distant ones.
+      mountains.sort((a, b) => b.z - a.z);
+
+      // Atmospheric perspective: far peaks tint toward the horizon's sky
+      // color so they recede gracefully. Sky color at horizon (from the
+      // gradient above): (50, 56, 84). Mountain core: dark cool blue.
+      const mountainBase = [22, 22, 36];
+      const skyAtHorizon = [50, 56, 84];
+
+      // Clip the drawing region to above the horizon so the natural
+      // triangle that we draw with its base AT the horizon line doesn't
+      // bleed pixels onto the ground — the ground covers the bases of
+      // close mountains the way it would in reality.
+      this.offCtx.save();
+      this.offCtx.beginPath();
+      this.offCtx.rect(0, 0, RW, horizon);
+      this.offCtx.clip();
+
+      for (const m of mountains) {
+        const fog = Math.max(0, Math.min(1, 1 - m.z / 150));
+        const r = (mountainBase[0] * fog + skyAtHorizon[0] * (1 - fog)) | 0;
+        const g = (mountainBase[1] * fog + skyAtHorizon[1] * (1 - fog)) | 0;
+        const b = (mountainBase[2] * fog + skyAtHorizon[2] * (1 - fog)) | 0;
+        this.offCtx.fillStyle = `rgb(${r},${g},${b})`;
+        this.offCtx.beginPath();
+        this.offCtx.moveTo(m.cx - m.halfW, horizon);
+        this.offCtx.lineTo(m.cx, m.peakY);
+        this.offCtx.lineTo(m.cx + m.halfW, horizon);
+        this.offCtx.closePath();
+        this.offCtx.fill();
+      }
+      this.offCtx.restore();
+
       this.ctx.imageSmoothingEnabled = false;
       this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
     }
@@ -1914,17 +2338,32 @@
           }
         }
       }
-      // Ambient smoke source so the canvas is never dead
+      // Ambient smoke sources so the canvas is never dead. Two columns at
+      // different horizontal positions, each with its own slow horizontal
+      // swing and slightly different vertical pulse — they curl past each
+      // other and the resulting interference is much more alive than a
+      // single source pendulating back and forth.
       if (this.mx === null) {
-        const t = this.tick * 0.025;
-        const cx = ((Math.sin(t) * 0.32 + 0.5) * N) | 0;
+        const t = this.tick * 0.022;
+        const sources = [
+          { cx: ((Math.sin(t) * 0.10 + 0.30) * N) | 0,         // left source ranges 0.20–0.40
+            push: 2.8 + Math.sin(t * 1.3) * 0.9,
+            sway: Math.cos(t * 1.4) * 1.1,
+            density: 24 + Math.sin(t * 0.8) * 4 },
+          { cx: ((Math.sin(t * 1.27 + 1.1) * 0.10 + 0.70) * N) | 0,  // right source ranges 0.60–0.80
+            push: 2.6 + Math.cos(t * 1.7 + 0.4) * 0.9,
+            sway: Math.sin(t * 0.9 + 1.3) * 1.3,
+            density: 22 + Math.cos(t * 0.6) * 4 },
+        ];
         const cy = N - 6;
-        for (let oj = -2; oj <= 2; oj++) {
-          for (let oi = -3; oi <= 3; oi++) {
-            const ix = this.IX(cx + oi, cy + oj);
-            this.d[ix] += 26;
-            this.v[ix] -= 3.2;                    // upward
-            this.u[ix] += Math.sin(t * 1.7) * 1.2;
+        for (const s of sources) {
+          for (let oj = -2; oj <= 2; oj++) {
+            for (let oi = -3; oi <= 3; oi++) {
+              const ix = this.IX(s.cx + oi, cy + oj);
+              this.d[ix] += s.density;
+              this.v[ix] -= s.push;
+              this.u[ix] += s.sway;
+            }
           }
         }
       }
@@ -2468,6 +2907,1277 @@ void main() {
   }
 
   // ============================================================
+  //   013 · REACTION-DIFFUSION (Gray-Scott; Turing 1952, Pearson 1993)
+  // ============================================================
+  class ReactionEffect extends Effect {
+    init() {
+      this.N = 192;
+      const S = this.N * this.N;
+      this.a  = new Float32Array(S);
+      this.b  = new Float32Array(S);
+      this.a2 = new Float32Array(S);
+      this.b2 = new Float32Array(S);
+
+      this.dt = 1.0;
+      this.Da = 1.0;
+      this.Db = 0.5;
+      this.stepsPerFrame = 10;
+
+      // Each (F, k) pair produces a different pattern family.
+      // The same algorithm, dramatically different worlds.
+      this.presets = [
+        { F: 0.055,  k: 0.062  },  // labyrinth (fast, dramatic — default)
+        { F: 0.030,  k: 0.062  },  // mitosis spots
+        { F: 0.039,  k: 0.058  },  // dense maze
+        { F: 0.026,  k: 0.051  },  // moving stripes
+        { F: 0.0367, k: 0.0649 },  // self-replicating spots (sparse, slow)
+      ];
+      this.presetIdx = 0;
+      this.F = this.presets[0].F;
+      this.k = this.presets[0].k;
+
+      this._reset();
+
+      this.off = document.createElement('canvas');
+      this.off.width = this.N;
+      this.off.height = this.N;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.N, this.N);
+    }
+
+    _reset() {
+      const N = this.N, S = N * N;
+      // Fill A=1, B=0 everywhere
+      for (let i = 0; i < S; i++) {
+        this.a[i]  = 1; this.a2[i] = 1;
+        this.b[i]  = 0; this.b2[i] = 0;
+      }
+      // Seed B at several small circles. Smaller/gentler seeds keep the initial
+      // conditions inside the stability regime — large concentrated B drives the
+      // reaction term up enough to make the FTCS scheme blow up.
+      for (let blob = 0; blob < 8; blob++) {
+        const cx = ((Math.random() * 0.8 + 0.1) * N) | 0;
+        const cy = ((Math.random() * 0.8 + 0.1) * N) | 0;
+        const r = 2 + (Math.random() * 3) | 0;
+        for (let dy = -r; dy <= r; dy++) {
+          for (let dx = -r; dx <= r; dx++) {
+            if (dx*dx + dy*dy <= r*r) {
+              const x = cx + dx, y = cy + dy;
+              if (x >= 0 && x < N && y >= 0 && y < N) {
+                this.b[y * N + x] = 0.6;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    onClick() {
+      this.presetIdx = (this.presetIdx + 1) % this.presets.length;
+      this.F = this.presets[this.presetIdx].F;
+      this.k = this.presets[this.presetIdx].k;
+      this._reset();
+    }
+
+    _step() {
+      const N = this.N;
+      const a = this.a, b = this.b;
+      const a2 = this.a2, b2 = this.b2;
+      const F = this.F, k = this.k;
+      const Da = this.Da, Db = this.Db, dt = this.dt;
+
+      // 9-point Laplacian (edge=0.2, diagonal=0.05, center=-1) is properly
+      // normalized: with Da=1.0, dt=1.0 this stays inside the stability bound.
+      // It's also more isotropic than the 5-point version — fewer grid-aligned
+      // artifacts in the resulting patterns.
+      // Toroidal boundaries make patterns wrap cleanly around the edges.
+      for (let y = 0; y < N; y++) {
+        const yu = (y === 0     ? N - 1 : y - 1) * N;
+        const yd = (y === N - 1 ? 0     : y + 1) * N;
+        const yc = y * N;
+        for (let x = 0; x < N; x++) {
+          const xl = x === 0     ? N - 1 : x - 1;
+          const xr = x === N - 1 ? 0     : x + 1;
+          const i = yc + x;
+
+          const lapA =
+            0.20 * (a[yc + xl] + a[yc + xr] + a[yu + x]  + a[yd + x]) +
+            0.05 * (a[yu + xl] + a[yu + xr] + a[yd + xl] + a[yd + xr])
+            - a[i];
+          const lapB =
+            0.20 * (b[yc + xl] + b[yc + xr] + b[yu + x]  + b[yd + x]) +
+            0.05 * (b[yu + xl] + b[yu + xr] + b[yd + xl] + b[yd + xr])
+            - b[i];
+
+          const ai = a[i], bi = b[i];
+          const reaction = ai * bi * bi;
+          // Clamp to [0, 1] — these values physically live in that range and
+          // clamping prevents the FTCS scheme from running away if a seed
+          // configuration briefly violates the stability bound.
+          const newA = ai + (Da * lapA - reaction + F * (1 - ai)) * dt;
+          const newB = bi + (Db * lapB + reaction - (F + k) * bi) * dt;
+          a2[i] = newA < 0 ? 0 : newA > 1 ? 1 : newA;
+          b2[i] = newB < 0 ? 0 : newB > 1 ? 1 : newB;
+        }
+      }
+      // Swap buffers
+      this.a = a2; this.a2 = a;
+      this.b = b2; this.b2 = b;
+    }
+
+    update() {
+      // Several simulation steps per render frame so patterns evolve at watchable speed
+      for (let s = 0; s < this.stepsPerFrame; s++) this._step();
+    }
+
+    render() {
+      const N = this.N;
+      const data = this.imgData.data;
+      const b = this.b;
+      // Map B concentration to amber gradient (black → ember → amber → near-white)
+      for (let i = 0; i < N * N; i++) {
+        const v = Math.min(1, Math.max(0, b[i] * 1.5));
+        let r, g, bl;
+        if (v < 0.35) {
+          const t = v / 0.35;
+          r = 70 * t; g = 18 * t; bl = 8 * t;
+        } else if (v < 0.75) {
+          const t = (v - 0.35) / 0.4;
+          r = 70 + 185 * t;
+          g = 18 + 108 * t;
+          bl = 8  + 53  * t;
+        } else {
+          const t = (v - 0.75) / 0.25;
+          r = 255;
+          g = 126 + 100 * t;
+          bl = 61  + 140 * t;
+        }
+        const j = i * 4;
+        data[j] = r; data[j+1] = g; data[j+2] = bl; data[j+3] = 255;
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.fillStyle = '#0a0a0c';
+      this.ctx.fillRect(0, 0, this.w, this.h);
+      this.ctx.imageSmoothingEnabled = true;
+      this.ctx.imageSmoothingQuality = 'high';
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+    }
+  }
+
+  // ============================================================
+  //   014 · STRANGE ATTRACTORS (Lorenz 1963 onward)
+  // ============================================================
+  class AttractorEffect extends Effect {
+    init() {
+      // Each attractor is a 3D system of ODEs plus tuning for how to
+      // visualize it: which 2D projection, what scale, where to center.
+      this.attractors = [
+        {
+          // Lorenz '63 — classic butterfly. Models atmospheric convection.
+          step: (x, y, z, dt) => {
+            const sigma = 10, rho = 28, beta = 8/3;
+            return [
+              x + sigma * (y - x) * dt,
+              y + (x * (rho - z) - y) * dt,
+              z + (x * y - beta * z) * dt,
+            ];
+          },
+          dt: 0.006, scale: 8, offset: [0, -25],
+          project: 'xz', start: [0.1, 0, 0],
+        },
+        {
+          // Aizawa — twisted donut / chaotic torus.
+          // XZ view shows the teardrop spiral; XY would just be concentric rings.
+          step: (x, y, z, dt) => {
+            const a = 0.95, b = 0.7, c = 0.6, d = 3.5, e = 0.25, f = 0.1;
+            return [
+              x + ((z - b) * x - d * y) * dt,
+              y + (d * x + (z - b) * y) * dt,
+              z + (c + a * z - z*z*z/3 - (x*x + y*y) * (1 + e * z) + f * z * x*x*x) * dt,
+            ];
+          },
+          dt: 0.012, scale: 90, offset: [0, -0.8],
+          project: 'xz', start: [0.1, 0, 0],
+        },
+        {
+          // Halvorsen — cyclically symmetric tangled curves
+          step: (x, y, z, dt) => {
+            const a = 1.4;
+            return [
+              x + (-a * x - 4 * y - 4 * z - y*y) * dt,
+              y + (-a * y - 4 * z - 4 * x - z*z) * dt,
+              z + (-a * z - 4 * x - 4 * y - x*x) * dt,
+            ];
+          },
+          dt: 0.005, scale: 14, offset: [3, 3],
+          project: 'xy', start: [-1, 0, 0],
+        },
+        {
+          // Thomas — sin-driven, looks like a sliced loaf of bread
+          step: (x, y, z, dt) => {
+            const b = 0.208186;
+            return [
+              x + (Math.sin(y) - b * x) * dt,
+              y + (Math.sin(z) - b * y) * dt,
+              z + (Math.sin(x) - b * z) * dt,
+            ];
+          },
+          dt: 0.06, scale: 48, offset: [0, 0],
+          project: 'xy', start: [0.1, 0, 0],
+        },
+      ];
+      this.idx = 0;
+      this._spawn();
+      this.firstFrame = true;
+    }
+
+    _spawn() {
+      const a = this.attractors[this.idx];
+      this.x = a.start[0]; this.y = a.start[1]; this.z = a.start[2];
+      this.framePoints = [];
+    }
+
+    onClick() {
+      this.idx = (this.idx + 1) % this.attractors.length;
+      this._spawn();
+      this.firstFrame = true;
+    }
+
+    update() {
+      const a = this.attractors[this.idx];
+      // Start the frame's polyline at the current position so it joins
+      // continuously with last frame's last segment, then take 90 small
+      // forward steps — the trail draws itself across many frames.
+      this.framePoints = [this.x, this.y, this.z];
+      for (let i = 0; i < 90; i++) {
+        [this.x, this.y, this.z] = a.step(this.x, this.y, this.z, a.dt);
+        this.framePoints.push(this.x, this.y, this.z);
+      }
+    }
+
+    _project(x, y, z) {
+      const a = this.attractors[this.idx];
+      const cx = this.w / 2, cy = this.h / 2;
+      const scale = a.scale * Math.min(this.w, this.h) / 540;
+      let px, py;
+      if (a.project === 'xz') { px = x; py = z; }
+      else                    { px = x; py = y; }
+      // Canvas Y is inverted (top=0). Negate vertical so values go up.
+      return [
+        cx + (px + a.offset[0]) * scale,
+        cy - (py + a.offset[1]) * scale,
+      ];
+    }
+
+    render() {
+      const ctx = this.ctx;
+      if (this.firstFrame) {
+        ctx.fillStyle = BG;
+        ctx.fillRect(0, 0, this.w, this.h);
+        this.firstFrame = false;
+      } else {
+        // Slow fade so the orbit accumulates visibly without saturating
+        ctx.fillStyle = 'rgba(10, 10, 12, 0.035)';
+        ctx.fillRect(0, 0, this.w, this.h);
+      }
+      if (this.framePoints.length < 6) return;
+
+      ctx.strokeStyle = ACCENT;
+      ctx.lineWidth = 0.7;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      const [fx, fy] = this._project(
+        this.framePoints[0], this.framePoints[1], this.framePoints[2]
+      );
+      ctx.moveTo(fx, fy);
+      for (let i = 3; i < this.framePoints.length; i += 3) {
+        const [px, py] = this._project(
+          this.framePoints[i], this.framePoints[i+1], this.framePoints[i+2]
+        );
+        ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+    }
+  }
+
+  // ============================================================
+  //   015 · DIFFUSION-LIMITED AGGREGATION (Witten & Sander, 1981)
+  // ============================================================
+  class DLAEffect extends Effect {
+    init() {
+      // Grid resolution — small enough to fill in watchable time,
+      // big enough that the dendrites read as branching, not chunky.
+      this.G = 220;
+      this.grid = new Uint16Array(this.G * this.G);  // 0 = empty, n = the order it stuck
+      this.cx = this.G >> 1;
+      this.cy = this.G >> 1;
+      this.age = 1;
+      this.grid[this.cy * this.G + this.cx] = this.age++;
+      this.maxR = 2;
+      this.maxR_limit = this.G * 0.46;
+      // Many walkers in flight at once — the first to find the cluster wins.
+      this.walkers = [];
+      this.WALKER_COUNT = 16;
+      // Spawn just outside the current cluster; kill walkers that stray too far.
+      // Otherwise most of the simulation is wasted on aimless random walks
+      // through the empty void far from anything to stick to.
+      this.SPAWN_OFFSET = 5;
+      this.KILL_FACTOR  = 3;
+
+      this.off = document.createElement('canvas');
+      this.off.width = this.G; this.off.height = this.G;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.G, this.G);
+      this._doneAt = null;
+    }
+
+    _spawn() {
+      const ang = Math.random() * Math.PI * 2;
+      const r = this.maxR + this.SPAWN_OFFSET;
+      return {
+        x: this.cx + Math.cos(ang) * r,
+        y: this.cy + Math.sin(ang) * r,
+        killR2: (this.maxR + this.SPAWN_OFFSET * this.KILL_FACTOR) ** 2,
+      };
+    }
+
+    _reset() {
+      this.grid.fill(0);
+      this.age = 1;
+      this.grid[this.cy * this.G + this.cx] = this.age++;
+      this.maxR = 2;
+      this.walkers.length = 0;
+      this._doneAt = null;
+    }
+
+    onClick() { this._reset(); }
+
+    update() {
+      // When the cluster fills its allotted radius, hold the finished view
+      // briefly so the eye can take in the structure, then restart.
+      if (this.maxR > this.maxR_limit) {
+        if (this._doneAt === null) this._doneAt = this.tick;
+        if (this.tick - this._doneAt > 180) this._reset();
+        return;
+      }
+
+      const G = this.G;
+      const STEP_BUDGET = 6000;  // total walker-steps allowed per frame
+      let budget = STEP_BUDGET;
+      while (budget-- > 0) {
+        // Top up the in-flight walker pool
+        while (this.walkers.length < this.WALKER_COUNT) {
+          this.walkers.push(this._spawn());
+        }
+        // Pick a random walker and step it once
+        const wi = (Math.random() * this.walkers.length) | 0;
+        const w = this.walkers[wi];
+        const r = (Math.random() * 4) | 0;
+        if      (r === 0) w.x++;
+        else if (r === 1) w.x--;
+        else if (r === 2) w.y++;
+        else              w.y--;
+        // Out-of-bounds kill (anything far past the cluster is rerolled —
+        // pure random walk in 2D is recurrent but in practice extremely slow)
+        const dx = w.x - this.cx, dy = w.y - this.cy;
+        if (dx*dx + dy*dy > w.killR2) { this.walkers.splice(wi, 1); continue; }
+        // 4-neighbor adhesion check
+        const xi = w.x | 0, yi = w.y | 0;
+        if (xi < 1 || xi >= G - 1 || yi < 1 || yi >= G - 1) continue;
+        const ix = yi * G + xi;
+        if (this.grid[ix - 1] || this.grid[ix + 1] ||
+            this.grid[ix - G] || this.grid[ix + G]) {
+          this.grid[ix] = this.age++;
+          const r2 = Math.sqrt(dx*dx + dy*dy);
+          if (r2 > this.maxR) this.maxR = r2;
+          this.walkers.splice(wi, 1);
+        }
+      }
+    }
+
+    render() {
+      const G = this.G;
+      const data = this.imgData.data;
+      const N = G * G;
+      const maxAge = this.age - 1;
+      // Color by age relative to the current newest particle — the wave of
+      // most-recently-stuck pixels always glows brightest at the tips.
+      for (let i = 0; i < N; i++) {
+        const a = this.grid[i];
+        const j = i * 4;
+        if (a === 0) {
+          data[j] = 10; data[j+1] = 10; data[j+2] = 12; data[j+3] = 255;
+        } else {
+          const t = a / maxAge;
+          let r, g, b;
+          if (t < 0.55) {
+            const u = t / 0.55;
+            r = 90  + 130 * u;
+            g = 30  +  80 * u;
+            b = 14  +  36 * u;
+          } else {
+            const u = (t - 0.55) / 0.45;
+            r = 220 +  35 * u;
+            g = 110 + 110 * u;
+            b = 50  + 130 * u;
+          }
+          data[j] = r; data[j+1] = g; data[j+2] = b; data[j+3] = 255;
+        }
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.fillStyle = BG;
+      this.ctx.fillRect(0, 0, this.w, this.h);
+      this.ctx.imageSmoothingEnabled = true;
+      this.ctx.imageSmoothingQuality = 'high';
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+    }
+  }
+
+  // ============================================================
+  //   016 · L-SYSTEMS (Lindenmayer, 1968)
+  // ============================================================
+  class LSystemEffect extends Effect {
+    init() {
+      // Each preset: an axiom, rewrite rules, turning angle, iteration depth,
+      // and where on the canvas the turtle starts pointing.
+      this.presets = [
+        { // Classic algorithmic plant — feathery and dense
+          axiom: 'F',
+          rules: { F: 'FF+[+F-F-F]-[-F+F+F]' },
+          angle: 22.5, iter: 4, startAng: -90, anchor: 'bottom',
+        },
+        { // Wider, more architectural bush
+          axiom: 'F',
+          rules: { F: 'F[+F]F[-F][F]' },
+          angle: 20, iter: 5, startAng: -90, anchor: 'bottom',
+        },
+        { // Asymmetric vine — visibly handed
+          axiom: 'X',
+          rules: {
+            X: 'F-[[X]+X]+F[+FX]-X',
+            F: 'FF',
+          },
+          angle: 25, iter: 5, startAng: -78, anchor: 'bottom',
+        },
+        { // Koch snowflake-ish — geometric rather than botanical
+          axiom: 'F++F++F',
+          rules: { F: 'F-F++F-F' },
+          angle: 60, iter: 4, startAng: 0, anchor: 'center',
+        },
+      ];
+      this.idx = 0;
+      this._build();
+    }
+
+    _build() {
+      const p = this.presets[this.idx];
+      // Expand the axiom by the rewrite rules `iter` times. The string can
+      // grow to tens of thousands of characters — that's fine, the turtle
+      // walk is linear and fast.
+      let s = p.axiom;
+      for (let i = 0; i < p.iter; i++) {
+        let next = '';
+        for (let j = 0; j < s.length; j++) {
+          const c = s[j];
+          next += (p.rules[c] !== undefined ? p.rules[c] : c);
+        }
+        s = next;
+      }
+      this.string = s;
+
+      // Dry-run the turtle to compute bounds, so we can scale the drawing
+      // to fit any canvas size regardless of how big this particular tree
+      // turned out to be.
+      const angRad = p.angle * Math.PI / 180;
+      let x = 0, y = 0, a = p.startAng * Math.PI / 180;
+      let minX = 0, maxX = 0, minY = 0, maxY = 0;
+      const stack = [];
+      for (let i = 0; i < s.length; i++) {
+        const c = s[i];
+        if (c === 'F' || c === 'G') {
+          x += Math.cos(a); y += Math.sin(a);
+          if (x < minX) minX = x; if (x > maxX) maxX = x;
+          if (y < minY) minY = y; if (y > maxY) maxY = y;
+        } else if (c === '+') a += angRad;
+        else if (c === '-') a -= angRad;
+        else if (c === '[') stack.push([x, y, a]);
+        else if (c === ']') { const t = stack.pop(); x = t[0]; y = t[1]; a = t[2]; }
+      }
+      this.bounds = { minX, maxX, minY, maxY };
+      this.drawIdx = 0;
+      this.firstFrame = true;
+      this._doneAt = null;
+    }
+
+    onClick() {
+      this.idx = (this.idx + 1) % this.presets.length;
+      this._build();
+    }
+
+    update() {
+      if (this.drawIdx < this.string.length) {
+        // ~5s growth regardless of tree size
+        const step = Math.max(2, Math.ceil(this.string.length / 300));
+        this.drawIdx = Math.min(this.string.length, this.drawIdx + step);
+        if (this.drawIdx >= this.string.length) this._doneAt = this.tick;
+      } else if (this.tick - this._doneAt > 180) {
+        this.idx = (this.idx + 1) % this.presets.length;
+        this._build();
+      }
+    }
+
+    render() {
+      const ctx = this.ctx;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, this.w, this.h);
+
+      const p = this.presets[this.idx];
+      const b = this.bounds;
+      const PAD = 18;
+      const sx = (this.w - PAD * 2) / Math.max(1, b.maxX - b.minX);
+      const sy = (this.h - PAD * 2) / Math.max(1, b.maxY - b.minY);
+      const scale = Math.min(sx, sy);
+
+      let ox, oy;
+      if (p.anchor === 'bottom') {
+        ox = this.w * 0.5 - ((b.minX + b.maxX) * 0.5) * scale;
+        oy = this.h - PAD - b.maxY * scale;
+      } else {
+        ox = this.w * 0.5 - ((b.minX + b.maxX) * 0.5) * scale;
+        oy = this.h * 0.5 - ((b.minY + b.maxY) * 0.5) * scale;
+      }
+
+      // Interpret the string up to drawIdx as turtle moves
+      const angRad = p.angle * Math.PI / 180;
+      let x = 0, y = 0, a = p.startAng * Math.PI / 180;
+      const stack = [];
+      ctx.strokeStyle = ACCENT;
+      ctx.lineWidth = 1;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      const limit = this.drawIdx;
+      for (let i = 0; i < limit; i++) {
+        const c = this.string[i];
+        if (c === 'F' || c === 'G') {
+          const nx = x + Math.cos(a);
+          const ny = y + Math.sin(a);
+          ctx.moveTo(ox + x * scale, oy + y * scale);
+          ctx.lineTo(ox + nx * scale, oy + ny * scale);
+          x = nx; y = ny;
+        } else if (c === '+') a += angRad;
+        else if (c === '-') a -= angRad;
+        else if (c === '[') stack.push([x, y, a]);
+        else if (c === ']') { const t = stack.pop(); x = t[0]; y = t[1]; a = t[2]; }
+      }
+      ctx.stroke();
+    }
+  }
+
+  // ============================================================
+  //   017 · PHYLLOTAXIS (Vogel, 1979)
+  // ============================================================
+  class PhyllotaxisEffect extends Effect {
+    init() {
+      this.MAX_SEEDS = 1200;
+      this.angles = [
+        { val: Math.PI * (3 - Math.sqrt(5)), label: 'φ (137.5077°)' },
+        { val: 137.3 * Math.PI / 180,        label: '137.3°' },
+        { val: 138.0 * Math.PI / 180,        label: '138.0°' },
+        { val: 90.0  * Math.PI / 180,        label: '90°' },
+      ];
+      this.idx = 0;
+      this.seeds = 0;
+      this._holdT = 0;
+    }
+    onClick() {
+      this.idx = (this.idx + 1) % this.angles.length;
+      this.seeds = 0;
+      this._holdT = 0;
+    }
+    update() {
+      if (this.seeds < this.MAX_SEEDS) {
+        this.seeds = Math.min(this.MAX_SEEDS, this.seeds + 8);
+      } else if (++this._holdT > 240) {
+        this.seeds = 0; this._holdT = 0;
+      }
+    }
+    render() {
+      const ctx = this.ctx;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, this.w, this.h);
+      const cx = this.w * 0.5, cy = this.h * 0.5;
+      const c = Math.min(this.w, this.h) / 70;
+      const angle = this.angles[this.idx].val;
+      for (let n = 0; n < this.seeds; n++) {
+        const a = n * angle;
+        const r = c * Math.sqrt(n);
+        const x = cx + Math.cos(a) * r;
+        const y = cy + Math.sin(a) * r;
+        const t = n / this.MAX_SEEDS;
+        ctx.fillStyle = `rgba(255, ${(126 + t*60) | 0}, ${(61 + t*100) | 0}, ${0.75 + t*0.22})`;
+        ctx.beginPath();
+        ctx.arc(x, y, 1.8 + t * 1.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      // Tiny corner label so users can see which angle is currently active.
+      // Bottom-right because the canvas-overlay claims the left side.
+      ctx.font = '10px JetBrains Mono';
+      ctx.fillStyle = '#5a5650';
+      ctx.textAlign = 'right';
+      ctx.fillText(this.angles[this.idx].label, this.w - 16, this.h - 14);
+      ctx.textAlign = 'start';
+    }
+  }
+
+  // ============================================================
+  //   018 · WAVE FUNCTION COLLAPSE (Gumin, 2016)
+  // ============================================================
+  class WFCEffect extends Effect {
+    init() {
+      // Tile alphabet: all 16 binary edge configurations.
+      // edge order N=bit3, E=bit2, S=bit1, W=bit0 of the tile index.
+      // Having all 16 means every constraint pair has a satisfying tile —
+      // the algorithm never paints itself into a contradiction.
+      this.NT = 16;
+      this.tiles = [];
+      for (let i = 0; i < 16; i++) {
+        this.tiles.push([(i>>3)&1, (i>>2)&1, (i>>1)&1, i&1]);
+      }
+      this.ALL = 0xFFFF;
+
+      // Precompute: compat[dir][t] = bitmask of tiles that can be placed
+      // as the neighbor in direction dir given tile t in the current cell.
+      // The constraint is simply tile.edge[dir] === neighbor.edge[opposite(dir)].
+      this.compat = [[], [], [], []];
+      const opp = [2, 3, 0, 1];   // N↔S, E↔W
+      for (let d = 0; d < 4; d++) {
+        for (let t = 0; t < this.NT; t++) {
+          let mask = 0;
+          const myEdge = this.tiles[t][d];
+          for (let n = 0; n < this.NT; n++) {
+            if (this.tiles[n][opp[d]] === myEdge) mask |= (1 << n);
+          }
+          this.compat[d][t] = mask;
+        }
+      }
+
+      this.COLS = 70;
+      this.ROWS = 30;
+      this.K_PER_FRAME = 12;      // collapses per frame; tune for pacing
+      this._reset();
+    }
+
+    _reset() {
+      this.cells = new Uint16Array(this.COLS * this.ROWS);
+      for (let i = 0; i < this.cells.length; i++) this.cells[i] = this.ALL;
+      // Highlight value 0..1 that decays each frame — gives a wave-of-light
+      // along the propagation path.
+      this.glow = new Float32Array(this.cells.length);
+      this._doneAt = null;
+    }
+
+    onClick() { this._reset(); }
+
+    // Hamming weight / popcount — number of allowed tiles for a cell
+    _pop(n) {
+      n = n - ((n >> 1) & 0x55555555);
+      n = (n & 0x33333333) + ((n >> 2) & 0x33333333);
+      return (((n + (n >> 4)) & 0x0F0F0F0F) * 0x01010101) >>> 24;
+    }
+
+    _step() {
+      // 1. Find the unsolved cell with minimum entropy (fewest options),
+      //    breaking ties uniformly at random (reservoir sampling)
+      let best = -1, bestC = Infinity, ties = 0;
+      const len = this.cells.length;
+      for (let i = 0; i < len; i++) {
+        const c = this._pop(this.cells[i]);
+        if (c <= 1) continue;
+        if (c < bestC) { bestC = c; best = i; ties = 1; }
+        else if (c === bestC) { ties++; if (Math.random() * ties < 1) best = i; }
+      }
+      if (best === -1) return false;  // everything collapsed
+
+      // 2. Collapse — pick a uniformly random tile from the cell's options
+      const mask = this.cells[best];
+      const opts = [];
+      for (let t = 0; t < this.NT; t++) if (mask & (1 << t)) opts.push(t);
+      const pick = opts[(Math.random() * opts.length) | 0];
+      this.cells[best] = 1 << pick;
+      this.glow[best] = 1.0;
+
+      // 3. Propagate the new constraint outward. For each cell on the queue,
+      //    look at its 4 neighbors: the neighbor's allowed mask is the OR
+      //    of compat[d][t] for every tile t still allowed in the source
+      //    cell. Intersect with the neighbor's existing mask; if anything
+      //    changed, enqueue the neighbor to keep cascading.
+      const queue = [best];
+      const dx = [0, 1, 0, -1];
+      const dy = [-1, 0, 1, 0];
+      while (queue.length) {
+        const i = queue.pop();
+        const x = i % this.COLS, y = (i / this.COLS) | 0;
+        for (let d = 0; d < 4; d++) {
+          const nx = x + dx[d], ny = y + dy[d];
+          if (nx < 0 || nx >= this.COLS || ny < 0 || ny >= this.ROWS) continue;
+          const ni = ny * this.COLS + nx;
+          const m = this.cells[i];
+          let allowed = 0;
+          for (let t = 0; t < this.NT; t++) {
+            if (m & (1 << t)) allowed |= this.compat[d][t];
+          }
+          const newM = this.cells[ni] & allowed;
+          if (newM !== this.cells[ni]) {
+            this.cells[ni] = newM;
+            if (this._pop(newM) === 1) this.glow[ni] = Math.max(this.glow[ni], 0.55);
+            queue.push(ni);
+          }
+        }
+      }
+      return true;
+    }
+
+    update() {
+      // Decay highlight regardless of state
+      for (let i = 0; i < this.glow.length; i++) this.glow[i] *= 0.86;
+
+      if (this._doneAt !== null) {
+        if (this.tick - this._doneAt > 420) this._reset();
+        return;
+      }
+      for (let i = 0; i < this.K_PER_FRAME; i++) {
+        if (!this._step()) { this._doneAt = this.tick; break; }
+      }
+    }
+
+    render() {
+      const ctx = this.ctx;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, this.w, this.h);
+      const cw = this.w / this.COLS;
+      const ch = this.h / this.ROWS;
+      ctx.lineCap = 'round';
+
+      for (let i = 0; i < this.cells.length; i++) {
+        const mask = this.cells[i];
+        const x = i % this.COLS, y = (i / this.COLS) | 0;
+        const px = x * cw, py = y * ch;
+        const cx = px + cw * 0.5, cy = py + ch * 0.5;
+        const c = this._pop(mask);
+
+        if (c === 1) {
+          // Collapsed cell — draw the connection pattern
+          let t = 0; while (!(mask & (1 << t))) t++;
+          const e = this.tiles[t];
+          const flash = this.glow[i];
+          const r = 255;
+          const g = (126 + 110 * flash) | 0;
+          const b = (61  + 150 * flash) | 0;
+          ctx.strokeStyle = `rgb(${r},${g},${b})`;
+          ctx.lineWidth = 1.5 + flash * 1.3;
+          ctx.beginPath();
+          if (e[0]) { ctx.moveTo(cx, cy); ctx.lineTo(cx, py); }
+          if (e[1]) { ctx.moveTo(cx, cy); ctx.lineTo(px + cw, cy); }
+          if (e[2]) { ctx.moveTo(cx, cy); ctx.lineTo(cx, py + ch); }
+          if (e[3]) { ctx.moveTo(cx, cy); ctx.lineTo(px, cy); }
+          ctx.stroke();
+          const edgeSum = e[0] + e[1] + e[2] + e[3];
+          if (edgeSum >= 1) {
+            ctx.fillStyle = ctx.strokeStyle;
+            ctx.beginPath();
+            ctx.arc(cx, cy, edgeSum >= 3 ? 2.6 : 1.7, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        } else {
+          // Uncollapsed — faint dot whose opacity tracks remaining entropy.
+          // Cells that have been "narrowed" but not yet collapsed glow more
+          // strongly, so the propagation wave is visible as a halo.
+          const t = (c - 1) / (this.NT - 1);  // 0 = collapsed, 1 = unconstrained
+          const alpha = 0.06 + (1 - t) * 0.20;
+          ctx.fillStyle = `rgba(255, 126, 61, ${alpha})`;
+          ctx.beginPath();
+          ctx.arc(cx, cy, 0.7 + (1 - t) * 1.4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+  }
+
+  // ============================================================
+  //   020 · LATTICE BOLTZMANN (D2Q9, flow past three cylinders)
+  // ============================================================
+  // Discrete-velocity model of the Navier–Stokes equations. Each grid cell
+  // stores 9 floats — populations streaming in 9 lattice directions
+  // (rest + 4 axial + 4 diagonal). Each step:
+  //   1. Collide: relax each population toward its local equilibrium.
+  //   2. Stream: each direction's population shifts one cell along c[k].
+  // Bounce-back walls (top/bot/obstacles) reflect populations into their
+  // opposite direction; inflow on the left prescribes equilibrium at U0;
+  // outflow on the right copies the cell into itself. We visualize the
+  // resulting velocity field the classic way: thousands of massless tracer
+  // particles seeded at the left edge, each tagged by its spawn-height
+  // band with a rainbow color, advected through the flow. Their drifting
+  // trails become streamlines that bend around the obstacles and wiggle
+  // through the vortex street downstream.
+  class LBMEffect extends Effect {
+    init() {
+      this.GW = 280; this.GH = 80;
+      this.N = this.GW * this.GH;
+      // τ = 0.53 → ν = 0.01. With D=14, U₀=0.10, Re = U·D/ν ≈ 140.
+      // Comfortably above the shedding threshold (Re_crit ≈ 47), and far
+      // enough from the τ=0.5 stability margin that the simulation can run
+      // indefinitely without numerical blow-up.
+      this.tau = 0.53;
+      this.U0 = 0.10;
+
+      // D2Q9 velocity set. Order: rest, E, N, W, S, NE, NW, SW, SE.
+      this.cx  = new Int8Array([0,  1, 0, -1,  0,  1, -1, -1,  1]);
+      this.cy  = new Int8Array([0,  0, 1,  0, -1,  1,  1, -1, -1]);
+      // Lattice weights for D2Q9. (Capital W to avoid colliding with the
+      // Effect base class's this.w, which holds the canvas CSS width.)
+      this.W   = new Float32Array([4/9, 1/9, 1/9, 1/9, 1/9, 1/36, 1/36, 1/36, 1/36]);
+      // Opposite-direction lookup (for bounce-back).
+      this.opp = new Int8Array([0, 3, 4, 1, 2, 7, 8, 5, 6]);
+
+      this.f  = new Float32Array(this.N * 9);
+      this.ft = new Float32Array(this.N * 9);
+      this.solid = new Uint8Array(this.N);
+      this.ux = new Float32Array(this.N);
+      this.uy = new Float32Array(this.N);
+
+      // Three cylinders in a triangle, apex pointing UPSTREAM (against the
+      // flow). The single front cylinder splits the inflow into two streams
+      // that then have to thread between the wider pair of downstream
+      // cylinders — a configuration that generates richer wake structure
+      // than a single bluff body could on its own.
+      this.cylinders = [
+        { x: this.GW * 0.16, y: this.GH * 0.50, r: 6 },   // front apex
+        { x: this.GW * 0.32, y: this.GH * 0.30, r: 6 },   // back top
+        { x: this.GW * 0.32, y: this.GH * 0.70, r: 6 },   // back bottom
+      ];
+      for (let y = 0; y < this.GH; y++) {
+        for (let x = 0; x < this.GW; x++) {
+          for (const c of this.cylinders) {
+            const dx = x - c.x, dy = y - c.y;
+            if (dx*dx + dy*dy < c.r * c.r) {
+              this.solid[y*this.GW + x] = 1;
+              break;
+            }
+          }
+        }
+      }
+
+      this._initF();
+
+      // Tracer particles: P particles in NBANDS color bands by initial Y.
+      // We track each particle's previous position so render() can draw a
+      // short line segment from old to new — the per-frame motion vector
+      // becomes a streak, and the fade-trail stitches many frames of these
+      // streaks together into continuous-looking streamlines.
+      this.P = 8000;
+      this.NBANDS = 32;
+      this.pxA    = new Float32Array(this.P);
+      this.pyA    = new Float32Array(this.P);
+      this.pxOld  = new Float32Array(this.P);
+      this.pyOld  = new Float32Array(this.P);
+      this.pBand  = new Uint8Array(this.P);
+
+      // Rainbow palette: top of frame (band 0) = red, bottom = violet.
+      // HSL hue rotates 0° → 280° across the strip, full saturation.
+      this.bandColors = new Array(this.NBANDS);
+      for (let b = 0; b < this.NBANDS; b++) {
+        const hue = b * (280 / (this.NBANDS - 1));
+        this.bandColors[b] = this._hslString(hue, 90, 56);
+      }
+
+      // Scatter the initial particles across the whole canvas so that
+      // streamlines appear immediately instead of taking 10 seconds for
+      // the first particles to traverse.
+      for (let i = 0; i < this.P; i++) {
+        this.pxA[i] = Math.random() * this.GW;
+        this.pyA[i] = Math.random() * this.GH;
+        this.pxOld[i] = this.pxA[i];
+        this.pyOld[i] = this.pyA[i];
+        this.pBand[i] = Math.min(this.NBANDS - 1,
+          Math.floor(this.pyA[i] / this.GH * this.NBANDS));
+      }
+
+      // Advection multiplier: how many lattice cells a particle moves
+      // per frame per unit of lattice velocity. Higher = livelier streaks.
+      this.advScale = 1.6;
+    }
+
+    _hslString(h, s, l) {
+      // HSL → "rgb(r, g, b)" string for fast fillStyle assignment.
+      h /= 360; s /= 100; l /= 100;
+      let r, g, b;
+      if (s === 0) { r = g = b = l; }
+      else {
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        const hue2rgb = (p, q, t) => {
+          if (t < 0) t += 1; if (t > 1) t -= 1;
+          if (t < 1/6) return p + (q - p) * 6 * t;
+          if (t < 1/2) return q;
+          if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          return p;
+        };
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+      }
+      return `rgb(${Math.round(r*255)}, ${Math.round(g*255)}, ${Math.round(b*255)})`;
+    }
+
+    _initF() {
+      // Uniform rightward flow at U0 plus a tiny transverse jitter
+      // (~0.5% of U0). Two cylinders supply most of the symmetry-breaking
+      // by themselves, so the noise just speeds up the first cycle.
+      for (let y = 0; y < this.GH; y++) {
+        for (let x = 0; x < this.GW; x++) {
+          const i = y*this.GW + x;
+          const uy = (Math.random() - 0.5) * 0.005;
+          const u2 = 1.5 * (this.U0*this.U0 + uy*uy);
+          for (let k = 0; k < 9; k++) {
+            const dot = 3 * (this.cx[k]*this.U0 + this.cy[k]*uy);
+            this.f[i*9 + k] = this.W[k] * (1 + dot + 0.5*dot*dot - u2);
+          }
+        }
+      }
+    }
+
+    _respawnParticle(i) {
+      // Re-emit at the left edge with a fresh random Y. The Y determines
+      // the band, so a particle's band may change on respawn — but the
+      // streamline pattern preserves overall band stratification because
+      // there's always a steady supply of "new red" particles at the top.
+      // Set old position equal to new so the first frame after respawn
+      // doesn't draw a long line from the particle's exit point.
+      this.pxA[i] = Math.random() * 4;
+      this.pyA[i] = Math.random() * this.GH;
+      this.pxOld[i] = this.pxA[i];
+      this.pyOld[i] = this.pyA[i];
+      this.pBand[i] = Math.min(this.NBANDS - 1,
+        Math.floor(this.pyA[i] / this.GH * this.NBANDS));
+    }
+
+    onClick() {
+      // Re-scatter particles AND give the flow a kick. Useful for
+      // breaking the simulation out of any locked-in periodic mode.
+      for (let i = 0; i < this.P; i++) {
+        this.pxA[i] = Math.random() * this.GW;
+        this.pyA[i] = Math.random() * this.GH;
+        this.pxOld[i] = this.pxA[i];
+        this.pyOld[i] = this.pyA[i];
+        this.pBand[i] = Math.min(this.NBANDS - 1,
+          Math.floor(this.pyA[i] / this.GH * this.NBANDS));
+      }
+      for (let y = 0; y < this.GH; y++) {
+        for (let x = 0; x < this.GW; x++) {
+          const i = y*this.GW + x;
+          if (this.solid[i]) continue;
+          const ux = this.U0 + (Math.random() - 0.5) * 0.02;
+          const uy = (y - this.GH/2) / this.GH * 0.06;
+          const usq = 1.5 * (ux*ux + uy*uy);
+          for (let k = 0; k < 9; k++) {
+            const dot = 3 * (this.cx[k]*ux + this.cy[k]*uy);
+            this.f[i*9 + k] = this.W[k] * (1 + dot + 0.5*dot*dot - usq);
+          }
+        }
+      }
+    }
+
+    _step() {
+      const { GW, GH, N, f, ft, solid, tau, cx, cy, W: w, opp, U0 } = this;
+      const invTau = 1 / tau;
+      const u2_0 = 1.5 * U0 * U0;
+
+      // Collide: in-place BGK relaxation toward local equilibrium.
+      // We clamp ux/uy and re-equilibrate cells whose populations have
+      // gone non-finite — a rare but real symptom of running close to
+      // the τ=0.5 stability margin. Catching it here keeps a single bad
+      // cell from poisoning the whole field via streaming.
+      for (let i = 0; i < N; i++) {
+        if (solid[i]) continue;
+        const i9 = i * 9;
+        let rho = 0, ux = 0, uy = 0;
+        for (let k = 0; k < 9; k++) {
+          const fk = f[i9 + k];
+          rho += fk;
+          ux += cx[k] * fk;
+          uy += cy[k] * fk;
+        }
+        if (!isFinite(rho) || rho < 1e-6 || rho > 5) {
+          // Cell is sick. Reset to equilibrium at inflow conditions.
+          for (let k = 0; k < 9; k++) {
+            const dot = 3 * cx[k] * U0;
+            f[i9 + k] = w[k] * (1 + dot + 0.5*dot*dot - u2_0);
+          }
+          this.ux[i] = U0; this.uy[i] = 0;
+          continue;
+        }
+        ux /= rho; uy /= rho;
+        // Clamp velocities to the lattice Mach safety zone.
+        if (ux >  0.20) ux =  0.20;
+        if (ux < -0.20) ux = -0.20;
+        if (uy >  0.20) uy =  0.20;
+        if (uy < -0.20) uy = -0.20;
+        this.ux[i] = ux; this.uy[i] = uy;
+        const u2 = 1.5 * (ux*ux + uy*uy);
+        for (let k = 0; k < 9; k++) {
+          const dot = 3 * (cx[k]*ux + cy[k]*uy);
+          const feq = w[k] * rho * (1 + dot + 0.5*dot*dot - u2);
+          f[i9 + k] += invTau * (feq - f[i9 + k]);
+        }
+      }
+
+      // Stream (pull form).
+      for (let y = 0; y < GH; y++) {
+        for (let x = 0; x < GW; x++) {
+          const i = y * GW + x;
+          if (solid[i]) continue;
+          const i9 = i * 9;
+          for (let k = 0; k < 9; k++) {
+            const nx = x - cx[k], ny = y - cy[k];
+            if (ny < 0 || ny >= GH) {
+              ft[i9 + k] = f[i9 + opp[k]];
+            } else if (nx < 0) {
+              const dot = 3 * cx[k] * U0;
+              ft[i9 + k] = w[k] * (1 + dot + 0.5*dot*dot - u2_0);
+            } else if (nx >= GW) {
+              ft[i9 + k] = f[i9 + k];
+            } else {
+              const j = ny * GW + nx;
+              if (solid[j]) {
+                ft[i9 + k] = f[i9 + opp[k]];
+              } else {
+                ft[i9 + k] = f[j*9 + k];
+              }
+            }
+          }
+        }
+      }
+      const tmp = this.f; this.f = this.ft; this.ft = tmp;
+    }
+
+    _advectParticles() {
+      const GW = this.GW, GH = this.GH;
+      const ux = this.ux, uy = this.uy, solid = this.solid;
+      const advScale = this.advScale;
+      for (let i = 0; i < this.P; i++) {
+        const px = this.pxA[i], py = this.pyA[i];
+        const x0 = Math.floor(px), y0 = Math.floor(py);
+        if (!(x0 >= 0 && x0 < GW - 1 && y0 >= 0 && y0 < GH - 1)) {
+          // Out of bounds OR NaN position — respawn.
+          this._respawnParticle(i); continue;
+        }
+        const fx = px - x0, fy = py - y0;
+        const i00 = y0 * GW + x0;
+        const i10 = i00 + 1;
+        const i01 = i00 + GW;
+        const i11 = i01 + 1;
+        const ix = (1-fx)*(1-fy)*ux[i00] + fx*(1-fy)*ux[i10]
+                 + (1-fx)*fy*ux[i01]     + fx*fy*ux[i11];
+        const iy = (1-fx)*(1-fy)*uy[i00] + fx*(1-fy)*uy[i10]
+                 + (1-fx)*fy*uy[i01]     + fx*fy*uy[i11];
+        const newX = px + ix * advScale;
+        const newY = py + iy * advScale;
+        // The !(condition) form catches NaN (which would make all the
+        // direct comparisons false and silently leak a NaN position).
+        if (!(newX >= 0 && newX < GW - 0.5 && newY >= 0 && newY < GH)) {
+          this._respawnParticle(i); continue;
+        }
+        const cxi = Math.floor(newX), cyi = Math.floor(newY);
+        if (solid[cyi * GW + cxi]) { this._respawnParticle(i); continue; }
+        // Save current as previous BEFORE overwriting; render() draws a
+        // line from old → new each frame.
+        this.pxOld[i] = px;
+        this.pyOld[i] = py;
+        this.pxA[i] = newX;
+        this.pyA[i] = newY;
+      }
+    }
+
+    update() {
+      // Three LBM sub-steps then advance the tracers once. The LBM
+      // simulation runs faster than the visualization needs so the
+      // velocity field is well-developed by the time particles sample it.
+      this._step();
+      this._step();
+      this._step();
+      this._advectParticles();
+    }
+
+    render() {
+      const ctx = this.ctx;
+      // Persistent fade: a low-alpha background pass dims last frame's
+      // drawing slightly. Combined with the per-frame line segments, this
+      // overlaps roughly 8–10 frames of motion into continuous-looking
+      // streamlines instead of disjoint dots.
+      ctx.fillStyle = 'rgba(10, 10, 12, 0.12)';
+      ctx.fillRect(0, 0, this.w, this.h);
+
+      const sX = this.w / this.GW;
+      const sY = this.h / this.GH;
+
+      // Render each particle as a short line from its old position to its
+      // new position. Batched by color band so we only swap strokeStyle
+      // NBANDS times per frame instead of P times. The double loop is
+      // O(P · NBANDS), but with no allocations and a tight inner loop it
+      // costs less than the random fillStyle thrash would.
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 1.5;
+      for (let b = 0; b < this.NBANDS; b++) {
+        ctx.strokeStyle = this.bandColors[b];
+        ctx.beginPath();
+        for (let i = 0; i < this.P; i++) {
+          if (this.pBand[i] !== b) continue;
+          ctx.moveTo(this.pxOld[i] * sX, this.pyOld[i] * sY);
+          ctx.lineTo(this.pxA[i]   * sX, this.pyA[i]   * sY);
+        }
+        ctx.stroke();
+      }
+
+      // Cylinders drawn last so the fade never dulls them. Dark interior
+      // masks any particle that briefly overlaps the ring; the bright
+      // red outline echoes the convention in the reference visualizations.
+      for (const c of this.cylinders) {
+        const cx = c.x * sX, cy = c.y * sY, cr = c.r * sX;
+        ctx.fillStyle = '#0a0a0c';
+        ctx.beginPath();
+        ctx.arc(cx, cy, cr - 0.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ff3322';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(cx, cy, cr, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // ============================================================
+  //   012 · CONWAY'S GAME OF LIFE (B3/S23, toroidal)
+  // ============================================================
+  // Each cell looks at its 8 neighbors. A live cell with 2 or 3 live
+  // neighbors stays alive; a dead cell with exactly 3 becomes alive;
+  // everything else dies. Wrap-around boundaries (torus topology) so
+  // gliders never fall off the edge and the population doesn't slowly
+  // bleed out at the walls. Cells that die leave a brief red-ember
+  // fade so the act of dying is visible — without that, deaths just
+  // become missing pixels and the simulation loses its pulse.
+  class LifeEffect extends Effect {
+    init() {
+      this.GW = 128;
+      this.GH = 96;
+      this.NCELLS = this.GW * this.GH;
+      this.cells = new Uint8Array(this.NCELLS);
+      this.next  = new Uint8Array(this.NCELLS);
+      this.fade  = new Uint8Array(this.NCELLS);
+      this.FADE_FRAMES = 6;
+
+      // Watchdog: Life loves to settle into still lifes and short-period
+      // oscillators. If nothing has changed for ~3 seconds we reseed so
+      // the canvas keeps moving.
+      this.framesSinceChange = 0;
+      this.STAGNATION_LIMIT = 180;
+
+      this._seed();
+
+      this.off = document.createElement('canvas');
+      this.off.width  = this.GW;
+      this.off.height = this.GH;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.GW, this.GH);
+    }
+
+    _seed() {
+      // Random density around 32% — empirically the sweet spot for
+      // generating gliders, oscillators, and complex dust patterns.
+      // Below ~20% the soup dies fast; above ~50% it collapses into
+      // dense stable lifes and oscillators.
+      for (let i = 0; i < this.NCELLS; i++) {
+        this.cells[i] = Math.random() < 0.32 ? 1 : 0;
+        this.fade[i] = 0;
+      }
+      this.framesSinceChange = 0;
+    }
+
+    onClick() { this._seed(); }
+
+    _step() {
+      const W = this.GW, H = this.GH;
+      const cells = this.cells, next = this.next, fade = this.fade;
+      let changed = false;
+      for (let y = 0; y < H; y++) {
+        const ym = (y - 1 + H) % H;
+        const yp = (y + 1) % H;
+        const yi  = y * W;
+        const ymi = ym * W;
+        const ypi = yp * W;
+        for (let x = 0; x < W; x++) {
+          const xm = (x - 1 + W) % W;
+          const xp = (x + 1) % W;
+          const n =
+            cells[ymi + xm] + cells[ymi + x] + cells[ymi + xp] +
+            cells[yi  + xm]                   + cells[yi  + xp] +
+            cells[ypi + xm] + cells[ypi + x] + cells[ypi + xp];
+          const cur = cells[yi + x];
+          const newVal = cur === 1 ? (n === 2 || n === 3 ? 1 : 0)
+                                   : (n === 3 ? 1 : 0);
+          next[yi + x] = newVal;
+          if (cur === 1 && newVal === 0) fade[yi + x] = this.FADE_FRAMES;
+          if (cur !== newVal) changed = true;
+        }
+      }
+      // Age the fade trails.
+      for (let i = 0; i < this.NCELLS; i++) if (fade[i] > 0) fade[i]--;
+      // Swap buffers.
+      const tmp = this.cells; this.cells = this.next; this.next = tmp;
+      return changed;
+    }
+
+    update() {
+      // Two generations per frame — enough motion to read as alive at
+      // 60fps, slow enough that you can still track gliders.
+      const a = this._step();
+      const b = this._step();
+      if (a || b) this.framesSinceChange = 0;
+      else this.framesSinceChange++;
+      if (this.framesSinceChange > this.STAGNATION_LIMIT) this._seed();
+    }
+
+    render() {
+      const data = this.imgData.data;
+      const cells = this.cells, fade = this.fade;
+      const F = this.FADE_FRAMES;
+      for (let i = 0; i < this.NCELLS; i++) {
+        const j = i * 4;
+        if (cells[i]) {
+          // Live cell: full amber accent.
+          data[j] = 255; data[j+1] = 126; data[j+2] = 61; data[j+3] = 255;
+        } else if (fade[i] > 0) {
+          // Just-died: deep red ember, fades over FADE_FRAMES gens.
+          const t = fade[i] / F;
+          data[j]   = 90 * t;
+          data[j+1] = 18 * t;
+          data[j+2] = 10 * t;
+          data[j+3] = 255;
+        } else {
+          // Background.
+          data[j] = 10; data[j+1] = 10; data[j+2] = 12; data[j+3] = 255;
+        }
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.fillStyle = '#0a0a0c';
+      this.ctx.fillRect(0, 0, this.w, this.h);
+      // Pixelated upscale — Life is a discrete grid, blurring it lies.
+      this.ctx.imageSmoothingEnabled = false;
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+    }
+  }
+
+  // ============================================================
   //   BOOTSTRAP — instantiate, observe, run on visibility
   // ============================================================
   const REGISTRY = {
@@ -2483,27 +4193,42 @@ void main() {
     fluid: FluidEffect,
     curl: CurlEffect,
     fluidgl: FluidGLEffect,
+    reaction: ReactionEffect,
+    attractor: AttractorEffect,
+    dla: DLAEffect,
+    lsystem: LSystemEffect,
+    phyllotaxis: PhyllotaxisEffect,
+    wfc: WFCEffect,
+    lbm: LBMEffect,
+    life: LifeEffect,
   };
 
-  const instances = [];
-  document.querySelectorAll('canvas[data-effect]').forEach(c => {
-    const cls = REGISTRY[c.dataset.effect];
-    if (!cls) return;
-    const inst = new cls(c);
-    instances.push(inst);
-  });
+  // Lazy init: only construct an Effect the first time its canvas enters the
+  // viewport. Once constructed, the instance is kept (so simulation state
+  // persists across scroll), but its rAF loop is paused while off-screen.
+  // rootMargin pre-warms the next/previous specimen so the first frame isn't
+  // a flash of empty canvas as you scroll into it.
+  const canvasToInstance = new WeakMap();
 
-  // Use IntersectionObserver to pause off-screen effects (perf)
   const io = new IntersectionObserver(entries => {
     for (const e of entries) {
-      const inst = instances.find(i => i.canvas === e.target);
-      if (!inst) continue;
-      if (e.isIntersecting) inst.start();
-      else inst.stop();
+      const canvas = e.target;
+      let inst = canvasToInstance.get(canvas);
+      if (e.isIntersecting) {
+        if (!inst) {
+          const cls = REGISTRY[canvas.dataset.effect];
+          if (!cls) continue;
+          inst = new cls(canvas);
+          canvasToInstance.set(canvas, inst);
+        }
+        inst.start();
+      } else if (inst) {
+        inst.stop();
+      }
     }
-  }, { threshold: 0.05 });
+  }, { threshold: 0.05, rootMargin: '300px 0px' });
 
-  for (const inst of instances) io.observe(inst.canvas);
+  document.querySelectorAll('canvas[data-effect]').forEach(c => io.observe(c));
 
   // ============================================================
   //   TOPBAR — track current specimen as you scroll
