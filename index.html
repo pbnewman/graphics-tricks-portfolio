@@ -1096,6 +1096,263 @@
       <p class="specimen-hint">Click to give the flow a kick.</p>
     </article>
 
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">021</span>
+        <span>Jones</span>
+        <span class="sep"></span>
+        <span>2010</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 80 lines</span>
+        <span class="sep"></span>
+        <span>Stigmergy</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="slime"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>1800 agents · 220 × 95 trail grid</span>
+            <span class="live">Foraging</span>
+          </div>
+          <div class="bot">
+            <span>sense · turn · deposit · diffuse · decay</span>
+            <span>Physarum polycephalum</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Slime <em>mold</em></h2>
+      <p class="specimen-desc">
+        Each agent sniffs three directions ahead, turns toward the strongest scent, walks one step,
+        and leaves a chemical mark behind. The marks diffuse and fade. Out of those four rules &mdash;
+        no agent aware of any other &mdash; emerges the same tangle of veins that real
+        <em style="color: var(--accent); font-style: italic;">Physarum polycephalum</em> grows when
+        it solves shortest-path problems in petri dishes. Stigmergy: communication through environment,
+        not signal.
+      </p>
+      <p class="specimen-hint">Move the cursor &mdash; the colony will reach toward it. Click to reseed.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">022</span>
+        <span>Lorensen &amp; Cline</span>
+        <span class="sep"></span>
+        <span>1987</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 60 lines</span>
+        <span class="sep"></span>
+        <span>Contour extraction</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="marching"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>8 metaballs · 3 iso-thresholds · 160 × 68</span>
+            <span class="live">Tracing</span>
+          </div>
+          <div class="bot">
+            <span>16-case lookup table</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Marching <em>squares</em></h2>
+      <p class="specimen-desc">
+        Sample a scalar field at the corners of a grid. For each cell, look at which of the four
+        corners are above the threshold &mdash; sixteen possible patterns &mdash; and emit the contour
+        segment connecting the appropriate edge midpoints. Linearly interpolate where it crosses
+        the threshold for smoothness. The 2D ancestor of marching cubes, and how every contour
+        line on every topographic map was ever drawn.
+      </p>
+      <p class="specimen-hint">Move the cursor to drag an extra metaball.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">023</span>
+        <span>Voronoi · Lloyd</span>
+        <span class="sep"></span>
+        <span>1908 &middot; 1957</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 70 lines</span>
+        <span class="sep"></span>
+        <span>Spatial partition</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="voronoi"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>24+ seeds · 180 × 80 grid</span>
+            <span class="live">Settling</span>
+          </div>
+          <div class="bot">
+            <span>nearest-seed assignment · centroidal drift</span>
+            <span>Lloyd step = 0.04</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title"><em>Voronoi</em> + Lloyd</h2>
+      <p class="specimen-desc">
+        Drop seeds on a plane. Color every point by which seed is closest. The diagram that falls
+        out is everywhere &mdash; cell biology, crystallography, mobile coverage maps. Lloyd's
+        contribution: each step, move every seed slightly toward the
+        <em style="color: var(--accent); font-style: italic;">centroid</em> of its own cell, and
+        repeat. The seeds drift apart until they fill space like soap bubbles, settling into the
+        blue-noise distribution used by everything from image stippling to dart-throwing samplers
+        to procedural terrain.
+      </p>
+      <p class="specimen-hint">Click anywhere to add a seed.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">024</span>
+        <span>Floyd &amp; Steinberg</span>
+        <span class="sep"></span>
+        <span>1976</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 50 lines</span>
+        <span class="sep"></span>
+        <span>Error diffusion</span>
+      </div>
+      <div class="canvas-frame pixelated">
+        <canvas data-effect="dither"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>160 × 138 source &nbsp;·&nbsp; smooth | quantized</span>
+            <span class="live">Quantizing</span>
+          </div>
+          <div class="bot">
+            <span>kernel: 7/16 · 3/16 · 5/16 · 1/16</span>
+            <span>2 / 4 / 8 / 16 levels</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Floyd&ndash;Steinberg <em>dither</em></h2>
+      <p class="specimen-desc">
+        For each pixel, round it to the nearest available palette entry &mdash; then spread the
+        rounding <em style="color: var(--accent); font-style: italic;">error</em> across its right
+        and bottom-row neighbors in the famous 7/16, 3/16, 5/16, 1/16 weights. The mistakes cancel
+        each other out across the image; only at any one pixel does the lie show. Half a page of
+        pseudo-code that gave every 8-bit display its own visual grammar.
+        <em style="color: var(--accent); font-style: italic;">Left</em> shows the continuous source;
+        <em style="color: var(--accent); font-style: italic;">right</em> shows what the algorithm
+        produces with the current palette depth.
+      </p>
+      <p class="specimen-hint">Move the cursor to add a light. Click to change palette depth.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">025</span>
+        <span>id Software · Carmack</span>
+        <span class="sep"></span>
+        <span>1992</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 80 lines</span>
+        <span class="sep"></span>
+        <span>One ray per column</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="raycast"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>120 rays · 20 × 16 grid map</span>
+            <span class="live">Walking</span>
+          </div>
+          <div class="bot">
+            <span>DDA traversal · fish-eye corrected</span>
+            <span>Wolfenstein 3D</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Ray <em>casting</em></h2>
+      <p class="specimen-desc">
+        A 3D-feeling world rendered without any 3D math. The map is a 2D grid; for each column of
+        the screen, fire a ray and DDA-step through the grid until you hit a wall. The distance to
+        that hit becomes the wall slice's height &mdash; closer is taller, farther is shorter
+        &mdash; and a fish-eye correction stops the edges from bowing. Two darknesses for the two
+        wall orientations give you shading for free. The trick that birthed Wolfenstein 3D, Doom,
+        and every first-person shooter that followed.
+      </p>
+      <p class="specimen-hint">Click to switch maps and drive with WASD / arrows.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">026</span>
+        <span>Julia · Mandelbrot</span>
+        <span class="sep"></span>
+        <span>1918 &middot; 1980</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 70 lines</span>
+        <span class="sep"></span>
+        <span>Escape-time iteration</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="mandelbrot"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>Mandelbrot &nbsp;·&nbsp; Julia(c)</span>
+            <span class="live">Iterating</span>
+          </div>
+          <div class="bot">
+            <span>z ← z² + c · escape radius 16</span>
+            <span>80 iterations · smooth count</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title">Mandelbrot &amp; <em>Julia</em></h2>
+      <p class="specimen-desc">
+        The same four-line iteration <code style="font-family: var(--mono); color: var(--accent);">z ← z² + c</code>
+        on the complex plane draws two of the most famous shapes in mathematics. On the
+        <em style="color: var(--accent); font-style: italic;">left</em>, the Mandelbrot set: which
+        values of <em style="color: var(--accent); font-style: italic;">c</em> keep the orbit bounded
+        starting from zero. On the <em style="color: var(--accent); font-style: italic;">right</em>,
+        the Julia set for the <em style="color: var(--accent); font-style: italic;">c</em> under your
+        cursor: which starting points stay bounded with that <em style="color: var(--accent); font-style: italic;">c</em>
+        fixed. Each point in the Mandelbrot is a Julia, and the Julia tells you the local shape of
+        the Mandelbrot there &mdash; a duality Julia worked out in 1918 with no computer to see what
+        he'd done.
+      </p>
+      <p class="specimen-hint">Hover the left to scrub c. Click to freeze.</p>
+    </article>
+
+    <article class="specimen featured">
+      <div class="specimen-head">
+        <span class="specimen-num">027</span>
+        <span>Demoscene</span>
+        <span class="sep"></span>
+        <span>late 1980s</span>
+        <span class="sep"></span>
+        <span class="lines">≈ 40 lines</span>
+        <span class="sep"></span>
+        <span>Interference</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas data-effect="plasma"></canvas>
+        <div class="canvas-overlay">
+          <div class="top">
+            <span>320 × 138 · 4 sinusoids · palette LUT</span>
+            <span class="live">Shimmering</span>
+          </div>
+          <div class="bot">
+            <span>per pixel: sin(x) + sin(y) + sin(x+y) + sin(r)</span>
+            <span>4 palettes</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="specimen-title"><em>Plasma</em></h2>
+      <p class="specimen-desc">
+        Per pixel, sum a handful of sine waves of <em style="color: var(--accent); font-style: italic;">x</em>,
+        <em style="color: var(--accent); font-style: italic;">y</em>, time, and distance to a center;
+        map the result through a palette lookup. That's it. The whole effect is twenty lines, but it
+        carried entire demoscene productions on machines too slow to draw anything else. Watch the
+        bands warp into one another &mdash; interference fringes from waves you can't see.
+      </p>
+      <p class="specimen-hint">Move the cursor to shift the center. Click to swap palette.</p>
+    </article>
+
   </section>
 
   <!-- ===== SEE ALSO ===== -->
@@ -1438,22 +1695,26 @@
     }
     update() {
       const g = this.gravity;
-      // Verlet step
+      // Verlet step. Damping 0.99 lets each swing decay before the next
+      // pin movement arrives, which keeps the chain reading as a graceful
+      // arc rather than thrashing under residual energy from prior frames.
       for (const n of this.nodes) {
-        const vx = (n.x - n.px) * 0.995;
-        const vy = (n.y - n.py) * 0.995;
+        const vx = (n.x - n.px) * 0.99;
+        const vy = (n.y - n.py) * 0.99;
         n.px = n.x; n.py = n.y;
         n.x += vx; n.y += vy + g;
       }
-      // Pin: follow mouse if hovering, else gentle Lissajous so rope keeps swinging
+      // Pin: follow mouse if hovering, else gentle Lissajous so rope keeps
+      // swinging. Frequency 0.007 and amplitude 0.22w give a slow, narrow
+      // sweep — enough to keep the chain alive, not enough to whip it.
       let pinX, pinY;
       if (this.mx !== null) {
         pinX = Math.max(20, Math.min(this.w - 20, this.mx));
         pinY = Math.max(20, Math.min(this.h - 80, this.my));
       } else {
-        const t = this.tick * 0.014;
-        pinX = this.w * 0.5 + Math.sin(t) * this.w * 0.30;
-        pinY = 32 + Math.sin(t * 1.7) * 14;
+        const t = this.tick * 0.007;
+        pinX = this.w * 0.5 + Math.sin(t) * this.w * 0.22;
+        pinY = 32 + Math.sin(t * 1.7) * 10;
       }
       this.nodes[0].x = pinX; this.nodes[0].y = pinY;
 
@@ -4178,6 +4439,1051 @@ void main() {
   }
 
   // ============================================================
+  //   021 · SLIME MOLD / Physarum (Jones, 2010)
+  // ============================================================
+  // Thousands of agents wander a trail grid. Each agent samples the trail
+  // at three points ahead (forward + two angled), turns toward whichever
+  // sniffed strongest, walks one step, and deposits a little more trail
+  // behind itself. Each tick the trail is box-blurred and slightly decayed.
+  // No agent is aware of any other — they coordinate purely through the
+  // chemical landscape they share, which is the definition of stigmergy.
+  // The same machinery (almost exactly) is what physical Physarum slime
+  // molds use to route between food sources in Petri dishes.
+  class SlimeEffect extends Effect {
+    init() {
+      this.GW = 220; this.GH = 95;
+      this.NA = 1800;
+      this.trail = new Float32Array(this.GW * this.GH);
+      this.trail2 = new Float32Array(this.GW * this.GH);
+      this.agents = new Array(this.NA);
+      this._seed();
+
+      // Sensor / motion tuning. SENSE_DIST sets how far ahead agents
+      // sample; if it's too small they can't "see" each other's trails and
+      // never form networks. TURN/STEP determine how reactive vs how
+      // straight-walking each agent is; DECAY governs how long old trails
+      // linger and therefore how thick the resulting veins get.
+      this.SENSE_DIST = 9;
+      this.SENSE_ANG = Math.PI / 4;
+      this.TURN = 0.5;
+      this.STEP = 0.7;
+      this.DECAY = 0.92;
+
+      // Three slowly orbiting food sources give the colony something to
+      // reach toward when the cursor isn't present. Without them the
+      // colony just swirls; with them you get the iconic network growth.
+      // Each one orbits at a different speed/phase so they don't lock up.
+      this.foods = [
+        { cx: this.GW * 0.22, cy: this.GH * 0.5,  rx: this.GW * 0.10, ry: this.GH * 0.28, w: 0.0040, ph: 0.0 },
+        { cx: this.GW * 0.78, cy: this.GH * 0.5,  rx: this.GW * 0.10, ry: this.GH * 0.28, w: 0.0035, ph: 2.1 },
+        { cx: this.GW * 0.50, cy: this.GH * 0.35, rx: this.GW * 0.14, ry: this.GH * 0.18, w: 0.0048, ph: 4.0 },
+      ];
+
+      this.off = document.createElement('canvas');
+      this.off.width = this.GW;
+      this.off.height = this.GH;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.GW, this.GH);
+    }
+
+    _seed() {
+      // Spawn agents across three small clusters. This makes the early
+      // frames legible — you watch three separate colonies grow, meet,
+      // and merge into one network, which is the most dramatic moment.
+      const clusters = [
+        { x: this.GW * 0.30, y: this.GH * 0.50 },
+        { x: this.GW * 0.70, y: this.GH * 0.50 },
+        { x: this.GW * 0.50, y: this.GH * 0.30 },
+      ];
+      for (let i = 0; i < this.NA; i++) {
+        const c = clusters[i % clusters.length];
+        const a = Math.random() * Math.PI * 2;
+        const r = 2 + Math.random() * 5;
+        this.agents[i] = {
+          x: c.x + Math.cos(a) * r,
+          y: c.y + Math.sin(a) * r,
+          a: a,
+        };
+      }
+    }
+
+    _sample(x, y) {
+      const ix = ((x | 0) % this.GW + this.GW) % this.GW;
+      const iy = ((y | 0) % this.GH + this.GH) % this.GH;
+      return this.trail[iy * this.GW + ix];
+    }
+
+    _inject(cx, cy, strength) {
+      for (let dy = -4; dy <= 4; dy++) {
+        for (let dx = -4; dx <= 4; dx++) {
+          if (dx*dx + dy*dy > 16) continue;
+          const ix = (((cx + dx) | 0) % this.GW + this.GW) % this.GW;
+          const iy = (((cy + dy) | 0) % this.GH + this.GH) % this.GH;
+          this.trail[iy * this.GW + ix] += strength;
+        }
+      }
+    }
+
+    onClick() {
+      this.trail.fill(0);
+      this.trail2.fill(0);
+      this._seed();
+    }
+
+    update() {
+      // Cursor takes priority when present. Otherwise the three orbiting
+      // food sources keep the colony actively reaching for something.
+      if (this.mx !== null) {
+        const cx = (this.mx / this.w) * this.GW;
+        const cy = (this.my / this.h) * this.GH;
+        this._inject(cx, cy, 4);
+      } else {
+        for (const f of this.foods) {
+          const fx = f.cx + Math.cos(this.tick * f.w + f.ph) * f.rx;
+          const fy = f.cy + Math.sin(this.tick * f.w * 1.3 + f.ph) * f.ry;
+          this._inject(fx, fy, 2.2);
+        }
+      }
+
+      // Move each agent. The sense-and-turn logic is the heart of the algorithm.
+      for (let i = 0; i < this.NA; i++) {
+        const ag = this.agents[i];
+        const fx = ag.x + Math.cos(ag.a) * this.SENSE_DIST;
+        const fy = ag.y + Math.sin(ag.a) * this.SENSE_DIST;
+        const lx = ag.x + Math.cos(ag.a - this.SENSE_ANG) * this.SENSE_DIST;
+        const ly = ag.y + Math.sin(ag.a - this.SENSE_ANG) * this.SENSE_DIST;
+        const rx = ag.x + Math.cos(ag.a + this.SENSE_ANG) * this.SENSE_DIST;
+        const ry = ag.y + Math.sin(ag.a + this.SENSE_ANG) * this.SENSE_DIST;
+        const F = this._sample(fx, fy);
+        const L = this._sample(lx, ly);
+        const R = this._sample(rx, ry);
+        if (F > L && F > R) { /* heading is best, keep it */ }
+        else if (L > R) ag.a -= this.TURN;
+        else if (R > L) ag.a += this.TURN;
+        else ag.a += (Math.random() - 0.5) * this.TURN;
+
+        ag.x += Math.cos(ag.a) * this.STEP;
+        ag.y += Math.sin(ag.a) * this.STEP;
+        if (ag.x < 0) ag.x += this.GW;
+        if (ag.x >= this.GW) ag.x -= this.GW;
+        if (ag.y < 0) ag.y += this.GH;
+        if (ag.y >= this.GH) ag.y -= this.GH;
+        const ix = ag.x | 0, iy = ag.y | 0;
+        this.trail[iy * this.GW + ix] += 1.5;
+      }
+
+      // Diffuse + decay. A 3×3 box blur per cell (with toroidal wrap) is
+      // the cheapest diffusion that still spreads gradients far enough for
+      // agents to sense the trail laid down by their neighbors.
+      const GW = this.GW, GH = this.GH;
+      const t = this.trail, t2 = this.trail2, D = this.DECAY;
+      for (let y = 0; y < GH; y++) {
+        const ym = y === 0 ? GH - 1 : y - 1;
+        const yp = y === GH - 1 ? 0 : y + 1;
+        for (let x = 0; x < GW; x++) {
+          const xm = x === 0 ? GW - 1 : x - 1;
+          const xp = x === GW - 1 ? 0 : x + 1;
+          const sum = t[ym*GW+xm] + t[ym*GW+x] + t[ym*GW+xp]
+                    + t[y*GW+xm]  + t[y*GW+x]  + t[y*GW+xp]
+                    + t[yp*GW+xm] + t[yp*GW+x] + t[yp*GW+xp];
+          t2[y*GW+x] = (sum / 9) * D;
+        }
+      }
+      this.trail = t2; this.trail2 = t;
+    }
+
+    render() {
+      const data = this.imgData.data;
+      const N = this.GW * this.GH;
+      // Power-curve color map: gamma ≈ 0.6 lifts low values into the
+      // visible range so faint trails appear as amber haze rather than
+      // disappearing into the background. Saturates smoothly toward white.
+      for (let i = 0; i < N; i++) {
+        const raw = Math.min(1, this.trail[i] * 0.05);
+        const v = Math.pow(raw, 0.6);
+        const j = i * 4;
+        data[j]   = (10 + v * 245) | 0;
+        data[j+1] = (10 + v * v * 200) | 0;
+        data[j+2] = (12 + v * v * v * 130) | 0;
+        data[j+3] = 255;
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.fillStyle = BG;
+      this.ctx.fillRect(0, 0, this.w, this.h);
+      this.ctx.imageSmoothingEnabled = true;
+      this.ctx.imageSmoothingQuality = 'high';
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+    }
+  }
+
+  // ============================================================
+  //   022 · MARCHING SQUARES (Lorensen & Cline, 1987, 2D analog)
+  // ============================================================
+  // A scalar field generated from a handful of moving metaballs. For each
+  // grid cell, we look at which of its 4 corners are above an iso-threshold
+  // (giving one of 16 possible patterns) and emit the corresponding contour
+  // segment(s), linearly interpolating where each one crosses the cell edge.
+  // Running the same march at three thresholds gives nested rings — the
+  // same trick every topographic map uses to draw elevation contours.
+  class MarchingEffect extends Effect {
+    init() {
+      this.GW = 160; this.GH = 68;
+      this.field = new Float32Array(this.GW * this.GH);
+      this.balls = [];
+      const N = 8;
+      for (let i = 0; i < N; i++) {
+        this.balls.push({
+          x: 10 + Math.random() * (this.GW - 20),
+          y: 10 + Math.random() * (this.GH - 20),
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: (Math.random() - 0.5) * 0.18,
+          r: 4 + Math.random() * 2,
+        });
+      }
+      // Three iso-thresholds → three nested contour rings per ball cluster.
+      // Lower thresholds because the smaller balls give a weaker field.
+      this.thresholds = [0.15, 0.30, 0.55];
+    }
+
+    update() {
+      for (const b of this.balls) {
+        b.x += b.vx; b.y += b.vy;
+        if (b.x < 4 || b.x > this.GW - 4) b.vx *= -1;
+        if (b.y < 4 || b.y > this.GH - 4) b.vy *= -1;
+      }
+      // Sample the metaball field. If the cursor is over the canvas, add
+      // an extra ball at the cursor position so the user can pull the
+      // contour lines around as they move.
+      const cx = this.mx !== null ? (this.mx / this.w) * this.GW : null;
+      const cy = this.my !== null ? (this.my / this.h) * this.GH : null;
+      const GW = this.GW, GH = this.GH;
+      for (let y = 0; y < GH; y++) {
+        for (let x = 0; x < GW; x++) {
+          let s = 0;
+          for (const b of this.balls) {
+            const dx = x - b.x, dy = y - b.y;
+            s += (b.r * b.r) / (dx*dx + dy*dy + 0.01);
+          }
+          if (cx !== null) {
+            const dx = x - cx, dy = y - cy;
+            s += 25 / (dx*dx + dy*dy + 0.01);
+          }
+          this.field[y * GW + x] = s;
+        }
+      }
+    }
+
+    render() {
+      const ctx = this.ctx;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, this.w, this.h);
+      const cw = this.w / (this.GW - 1);
+      const ch = this.h / (this.GH - 1);
+      const F = this.field, GW = this.GW;
+
+      for (let ti = 0; ti < this.thresholds.length; ti++) {
+        const T = this.thresholds[ti];
+        const alpha = 0.35 + ti * 0.25;
+        ctx.strokeStyle = `rgba(255, ${126 + ti * 40}, ${61 + ti * 50}, ${alpha})`;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        for (let y = 0; y < this.GH - 1; y++) {
+          for (let x = 0; x < this.GW - 1; x++) {
+            const tl = F[y * GW + x];
+            const tr = F[y * GW + x + 1];
+            const br = F[(y+1) * GW + x + 1];
+            const bl = F[(y+1) * GW + x];
+            // Build the 4-bit corner-classification code.
+            let code = 0;
+            if (tl > T) code |= 1;
+            if (tr > T) code |= 2;
+            if (br > T) code |= 4;
+            if (bl > T) code |= 8;
+            if (code === 0 || code === 15) continue;
+
+            // Linearly interpolate where each cell edge crosses the iso-line.
+            const px = x * cw, py = y * ch;
+            const tT = (T - tl) / (tr - tl);
+            const rT = (T - tr) / (br - tr);
+            const bT = (T - bl) / (br - bl);
+            const lT = (T - tl) / (bl - tl);
+            const topX  = px + tT * cw, topY  = py;
+            const rgtX  = px + cw,      rgtY  = py + rT * ch;
+            const botX  = px + bT * cw, botY  = py + ch;
+            const lftX  = px,           lftY  = py + lT * ch;
+
+            // 16-case lookup. Symmetric pairs collapse: code N and 15-N
+            // emit the same segment (just inverted inside/outside).
+            switch (code) {
+              case 1:  case 14: ctx.moveTo(lftX, lftY); ctx.lineTo(topX, topY); break;
+              case 2:  case 13: ctx.moveTo(topX, topY); ctx.lineTo(rgtX, rgtY); break;
+              case 4:  case 11: ctx.moveTo(rgtX, rgtY); ctx.lineTo(botX, botY); break;
+              case 8:  case 7:  ctx.moveTo(botX, botY); ctx.lineTo(lftX, lftY); break;
+              case 3:  case 12: ctx.moveTo(lftX, lftY); ctx.lineTo(rgtX, rgtY); break;
+              case 6:  case 9:  ctx.moveTo(topX, topY); ctx.lineTo(botX, botY); break;
+              // Ambiguous saddle cases — pick one resolution consistently.
+              case 5:  ctx.moveTo(lftX, lftY); ctx.lineTo(topX, topY);
+                       ctx.moveTo(rgtX, rgtY); ctx.lineTo(botX, botY); break;
+              case 10: ctx.moveTo(topX, topY); ctx.lineTo(rgtX, rgtY);
+                       ctx.moveTo(botX, botY); ctx.lineTo(lftX, lftY); break;
+            }
+          }
+        }
+        ctx.stroke();
+      }
+    }
+  }
+
+  // ============================================================
+  //   023 · VORONOI + LLOYD RELAXATION
+  // ============================================================
+  // For each pixel we find its nearest seed by brute-force scan. That's
+  // O(N · M) where N = pixels and M = seeds — fine at this resolution, and
+  // it lets us simultaneously accumulate the centroid of each cell while
+  // we're already iterating. Lloyd's algorithm then nudges every seed
+  // toward its cell's centroid each frame; over time the seeds settle into
+  // a near-uniform packing (a *centroidal Voronoi tessellation*) that is
+  // the gold-standard blue-noise point distribution.
+  class VoronoiEffect extends Effect {
+    init() {
+      this.GW = 180; this.GH = 80;
+      this.MAX_SEEDS = 40;
+      this.idMap = new Int16Array(this.GW * this.GH);
+      this.seeds = [];
+      this._reseed();
+
+      this.off = document.createElement('canvas');
+      this.off.width = this.GW;
+      this.off.height = this.GH;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.GW, this.GH);
+    }
+
+    _reseed() {
+      this.seeds = [];
+      const N = 22;
+      for (let i = 0; i < N; i++) {
+        this.seeds.push({
+          x: 4 + Math.random() * (this.GW - 8),
+          y: 4 + Math.random() * (this.GH - 8),
+          h: Math.random(),
+        });
+      }
+    }
+
+    onClick(cx, cy) {
+      if (this.seeds.length >= this.MAX_SEEDS) {
+        this._reseed();
+      } else {
+        this.seeds.push({
+          x: (cx / this.w) * this.GW,
+          y: (cy / this.h) * this.GH,
+          h: Math.random(),
+        });
+      }
+    }
+
+    update() {
+      const GW = this.GW, GH = this.GH;
+      const S = this.seeds;
+      const NS = S.length;
+      // Per-seed centroid accumulators.
+      const cxs = new Float64Array(NS);
+      const cys = new Float64Array(NS);
+      const cnt = new Int32Array(NS);
+      for (let y = 0; y < GH; y++) {
+        for (let x = 0; x < GW; x++) {
+          let best = 0, bd = Infinity;
+          for (let i = 0; i < NS; i++) {
+            const dx = x - S[i].x, dy = y - S[i].y;
+            const d = dx*dx + dy*dy;
+            if (d < bd) { bd = d; best = i; }
+          }
+          this.idMap[y * GW + x] = best;
+          cxs[best] += x; cys[best] += y; cnt[best]++;
+        }
+      }
+      // Lloyd step: move each seed gently toward its centroid.
+      for (let i = 0; i < NS; i++) {
+        if (cnt[i] > 0) {
+          const tx = cxs[i] / cnt[i], ty = cys[i] / cnt[i];
+          S[i].x += (tx - S[i].x) * 0.04;
+          S[i].y += (ty - S[i].y) * 0.04;
+        }
+      }
+    }
+
+    render() {
+      const GW = this.GW, GH = this.GH;
+      const data = this.imgData.data;
+      const id = this.idMap;
+      // Cell interior color: a warm gray varying subtly by seed hue.
+      for (let i = 0; i < GW * GH; i++) {
+        const idx = id[i];
+        const h = (this.seeds[idx] && this.seeds[idx].h) || 0;
+        const j = i * 4;
+        data[j]   = 24 + h * 38;
+        data[j+1] = 16 + h * 18;
+        data[j+2] = 14 + h * 6;
+        data[j+3] = 255;
+      }
+      // Edge pass: brighten any pixel whose right or bottom neighbor
+      // belongs to a different cell.
+      for (let y = 0; y < GH; y++) {
+        for (let x = 0; x < GW - 1; x++) {
+          const a = id[y*GW+x], b = id[y*GW+x+1];
+          if (a !== b) {
+            const j = (y*GW+x) * 4;
+            data[j] = 255; data[j+1] = 126; data[j+2] = 61;
+          }
+        }
+      }
+      for (let y = 0; y < GH - 1; y++) {
+        for (let x = 0; x < GW; x++) {
+          const a = id[y*GW+x], b = id[(y+1)*GW+x];
+          if (a !== b) {
+            const j = (y*GW+x) * 4;
+            data[j] = 255; data[j+1] = 126; data[j+2] = 61;
+          }
+        }
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.fillStyle = BG;
+      this.ctx.fillRect(0, 0, this.w, this.h);
+      this.ctx.imageSmoothingEnabled = true;
+      this.ctx.imageSmoothingQuality = 'high';
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+      // Seed dots drawn on top at native canvas resolution.
+      this.ctx.fillStyle = '#fff5e8';
+      for (const s of this.seeds) {
+        this.ctx.beginPath();
+        this.ctx.arc((s.x / GW) * this.w, (s.y / GH) * this.h, 2.2, 0, Math.PI * 2);
+        this.ctx.fill();
+      }
+    }
+  }
+
+  // ============================================================
+  //   024 · FLOYD–STEINBERG DITHERING (1976)
+  // ============================================================
+  // Each pixel rounds to its nearest available palette entry, then PUSHES
+  // the quantization error onto its neighbors at the canonical kernel
+  // weights (7/16 right, 3/16 below-left, 5/16 below, 1/16 below-right).
+  // The mistakes cancel out across the image, so you can render smooth
+  // gradients with only a handful of grey levels — the same trick every
+  // 8-bit display, every printed newspaper photo, every GIF ever used.
+  // The source here is a smooth procedural scene (two animated lights, plus
+  // a slow sinusoidal ripple) that we re-quantize every frame.
+  class DitherEffect extends Effect {
+    init() {
+      // Source signal is generated at one half-width of the display buffer.
+      // The display buffer is two source widths plus a 1-px vertical divider —
+      // left half shows the smooth source, right half shows the same source
+      // after Floyd–Steinberg with the current palette depth.
+      this.W = 160; this.H = 138;
+      this.src = new Float32Array(this.W * this.H);
+      this.err = new Float32Array(this.W * this.H);
+      this.palettes = [2, 4, 8, 16];
+      this.paletteIdx = 0;
+
+      this.canvasW = this.W * 2;
+      this.off = document.createElement('canvas');
+      this.off.width = this.canvasW;
+      this.off.height = this.H;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.canvasW, this.H);
+    }
+
+    onClick() {
+      this.paletteIdx = (this.paletteIdx + 1) % this.palettes.length;
+    }
+
+    update() {
+      const t = this.tick * 0.012;
+      const W = this.W, H = this.H;
+      // Light 1: orbits the source center on a slow ellipse.
+      const lx1 = W * 0.5 + Math.cos(t * 0.7) * W * 0.32;
+      const ly1 = H * 0.5 + Math.sin(t * 0.5) * H * 0.38;
+      // Light 2: follows cursor (mapped into source coordinates so the
+      // light shows at the same relative position whether the cursor is
+      // in the left half or the right half); falls back to counter-orbit
+      // when no cursor is present.
+      let lx2, ly2;
+      if (this.mx !== null) {
+        const halfW = this.w * 0.5;
+        const xInHalf = this.mx % halfW;
+        lx2 = (xInHalf / halfW) * W;
+        ly2 = (this.my / this.h) * H;
+      } else {
+        lx2 = W * 0.5 + Math.cos(-t * 0.9 + 1.5) * W * 0.34;
+        ly2 = H * 0.5 + Math.sin(-t * 1.1 + 0.7) * H * 0.34;
+      }
+      for (let y = 0; y < H; y++) {
+        for (let x = 0; x < W; x++) {
+          const d1 = Math.hypot(x - lx1, y - ly1);
+          const d2 = Math.hypot(x - lx2, y - ly2);
+          const v1 = Math.max(0, 1 - d1 / 80);
+          const v2 = Math.max(0, 1 - d2 / 60);
+          let v = v1 + v2 * 0.85;
+          v += Math.sin(x * 0.04 + y * 0.05 + t * 1.4) * 0.06;
+          this.src[y * W + x] = Math.min(1, Math.max(0, v * 0.55));
+        }
+      }
+    }
+
+    _amber(v) {
+      // Single palette mapping used for both halves so the comparison
+      // is honest — only the input values differ.
+      return [
+        (10 + v * 245) | 0,
+        (10 + v * v * 200) | 0,
+        (12 + v * v * v * 130) | 0,
+      ];
+    }
+
+    render() {
+      const W = this.W, H = this.H, CW = this.canvasW;
+      const levels = this.palettes[this.paletteIdx];
+      const step = 1 / (levels - 1);
+      const err = this.err;
+      err.set(this.src);
+      // Floyd–Steinberg on the err buffer (in place). Top→bottom, left→right.
+      for (let y = 0; y < H; y++) {
+        for (let x = 0; x < W; x++) {
+          const i = y * W + x;
+          const old = err[i];
+          const q = Math.round(old * (levels - 1)) * step;
+          err[i] = q;
+          const e = old - q;
+          if (x + 1 < W)              err[i + 1]     += e * 7/16;
+          if (x - 1 >= 0 && y + 1 < H) err[i + W - 1] += e * 3/16;
+          if (y + 1 < H)              err[i + W]     += e * 5/16;
+          if (x + 1 < W && y + 1 < H) err[i + W + 1] += e * 1/16;
+        }
+      }
+      const data = this.imgData.data;
+      // Each row writes: left half (smooth source), right half (dithered).
+      for (let y = 0; y < H; y++) {
+        const rowStart = y * CW;
+        for (let x = 0; x < W; x++) {
+          const cs = this._amber(this.src[y * W + x]);
+          const cd = this._amber(err[y * W + x]);
+          const jL = (rowStart + x) * 4;
+          const jR = (rowStart + W + x) * 4;
+          data[jL] = cs[0]; data[jL+1] = cs[1]; data[jL+2] = cs[2]; data[jL+3] = 255;
+          data[jR] = cd[0]; data[jR+1] = cd[1]; data[jR+2] = cd[2]; data[jR+3] = 255;
+        }
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.fillStyle = BG;
+      this.ctx.fillRect(0, 0, this.w, this.h);
+      this.ctx.imageSmoothingEnabled = false;
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+      // Faint divider line at display resolution — matches the style used
+      // by entry 026, sitting above the pixel grid rather than inside it.
+      this.ctx.strokeStyle = 'rgba(244, 241, 234, 0.12)';
+      this.ctx.lineWidth = 1;
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.w / 2, 0);
+      this.ctx.lineTo(this.w / 2, this.h);
+      this.ctx.stroke();
+    }
+  }
+
+  // ============================================================
+  //   025 · RAYCASTING — Wolfenstein 3D style (Carmack, 1992)
+  // ============================================================
+  // For each screen column we shoot a ray into a 2D grid map and DDA-step
+  // it cell by cell until we hit a wall. The distance to that hit (with a
+  // cosine fish-eye correction) determines how tall the wall slice should
+  // be on screen, and which face of the cell was hit determines its shade.
+  // No floors, no ceilings, no real 3D math — just 120 rays per frame.
+  class RaycastEffect extends Effect {
+    init() {
+      // Two small maps. 1 = wall, 0 = open floor. Both maps are designed
+      // with a fully open rectangular perimeter just inside the outer wall —
+      // the auto-walk path traverses that perimeter so it never clips a
+      // wall and never has to backtrack.
+      const M = [
+        [
+          "11111111111111111111",
+          "10000000000000000001",
+          "10011110001110011001",
+          "10010000001000010001",
+          "10010001100000011001",
+          "10000001100010000001",
+          "10001110000011100001",
+          "10001000000001000001",
+          "10000000111100000001",
+          "10001100000000110001",
+          "10000000111100000001",
+          "10000001100010000001",
+          "10011110000011100001",
+          "10000001100000010001",
+          "10000000000000000001",
+          "11111111111111111111",
+        ],
+        [
+          "11111111111111111111",
+          "10000000000000000001",
+          "10110110110110110101",
+          "10000000000000000001",
+          "10110110110110110101",
+          "10000000000000000001",
+          "10110110110110110101",
+          "10000000000000000001",
+          "10000000000000000001",
+          "10110110110110110101",
+          "10000000000000000001",
+          "10110110110110110101",
+          "10000000000000000001",
+          "10110110110110110101",
+          "10000000000000000001",
+          "11111111111111111111",
+        ],
+      ];
+      this.maps = M.map(rows => rows.map(r => r.split('').map(Number)));
+      this.mapIdx = 0;
+      this._setMap();
+      this.pathT = 0;
+
+      // Manual-mode state: when true, the auto-walk pauses and WASD /
+      // arrow keys drive the player directly. A click on the canvas
+      // switches to the next map *and* enters manual mode; a click
+      // outside the canvas (or Escape) exits.
+      this.manualMode = false;
+      this.keys = new Set();
+
+      // Document-level listeners — canvases can't hold keyboard focus
+      // without tabindex/contenteditable hacks, so we listen globally and
+      // gate on manualMode. preventDefault on movement keys keeps the
+      // page from scrolling out from under us while the user drives.
+      this._kd = (e) => {
+        if (!this.manualMode) return;
+        const k = e.key.toLowerCase();
+        if (k === 'w' || k === 'a' || k === 's' || k === 'd' ||
+            k === 'arrowup' || k === 'arrowdown' || k === 'arrowleft' || k === 'arrowright') {
+          this.keys.add(k);
+          e.preventDefault();
+        } else if (k === 'escape') {
+          this.manualMode = false;
+          this.keys.clear();
+        }
+      };
+      this._ku = (e) => {
+        this.keys.delete(e.key.toLowerCase());
+      };
+      this._md = (e) => {
+        if (this.manualMode && !this.canvas.contains(e.target)) {
+          this.manualMode = false;
+          this.keys.clear();
+        }
+      };
+      document.addEventListener('keydown', this._kd);
+      document.addEventListener('keyup', this._ku);
+      document.addEventListener('mousedown', this._md);
+    }
+
+    _setMap() {
+      this.map = this.maps[this.mapIdx];
+      this.MH = this.map.length;
+      this.MW = this.map[0].length;
+      this.px = 1.5;
+      this.py = 1.5;
+      this.pa = 0;
+      this.pathT = 0;
+    }
+
+    onClick() {
+      this.mapIdx = (this.mapIdx + 1) % this.maps.length;
+      this._setMap();
+      this.manualMode = true;
+      this.keys.clear();
+    }
+
+    _open(x, y) {
+      if (x < 0 || x >= this.MW || y < 0 || y >= this.MH) return false;
+      return this.map[y | 0][x | 0] === 0;
+    }
+
+    // Lerp between angles handling the 2π wrap so a 170° → -170° turn
+    // goes the short way (20°) instead of the long way (340°).
+    _angLerp(a, b, t) {
+      let diff = b - a;
+      while (diff > Math.PI) diff -= 2 * Math.PI;
+      while (diff < -Math.PI) diff += 2 * Math.PI;
+      return a + diff * t;
+    }
+
+    update() {
+      if (this.manualMode) {
+        // Direct WASD / arrow-key control with separate-axis collision so
+        // the player can slide along walls instead of catching on corners.
+        const TURN = 0.0225;
+        const SPEED = 0.035;
+        if (this.keys.has('a') || this.keys.has('arrowleft'))  this.pa -= TURN;
+        if (this.keys.has('d') || this.keys.has('arrowright')) this.pa += TURN;
+        let move = 0;
+        if (this.keys.has('w') || this.keys.has('arrowup'))   move += SPEED;
+        if (this.keys.has('s') || this.keys.has('arrowdown')) move -= SPEED;
+        if (move !== 0) {
+          const dx = Math.cos(this.pa) * move;
+          const dy = Math.sin(this.pa) * move;
+          if (this._open(this.px + dx, this.py)) this.px += dx;
+          if (this._open(this.px, this.py + dy)) this.py += dy;
+        }
+      } else {
+        // Auto-walk along the rectangular perimeter. 4 equal-time segments
+        // × ~50 seconds per full loop at 60fps — a slow casual stroll. The
+        // gentle angular lerp (0.025) toward the current segment's heading
+        // turns each corner into a soft curve over ~80 frames rather than
+        // a 90° snap.
+        const LOOP = 3000;
+        this.pathT = (this.pathT + 1) % LOOP;
+        const t = this.pathT / LOOP;
+        const corners = [
+          [1.5, 1.5],
+          [this.MW - 1.5, 1.5],
+          [this.MW - 1.5, this.MH - 1.5],
+          [1.5, this.MH - 1.5],
+        ];
+        const headings = [0, Math.PI / 2, Math.PI, -Math.PI / 2];
+        const seg = Math.floor(t * 4);
+        const segT = (t * 4) - seg;
+        const a = corners[seg];
+        const b = corners[(seg + 1) % 4];
+        this.px = a[0] + (b[0] - a[0]) * segT;
+        this.py = a[1] + (b[1] - a[1]) * segT;
+        this.pa = this._angLerp(this.pa, headings[seg], 0.025);
+      }
+    }
+
+    render() {
+      const ctx = this.ctx;
+      ctx.fillStyle = '#1a1418';
+      ctx.fillRect(0, 0, this.w, this.h * 0.5);
+      ctx.fillStyle = '#0a0a0c';
+      ctx.fillRect(0, this.h * 0.5, this.w, this.h * 0.5);
+
+      const COLUMNS = 120;
+      const colW = this.w / COLUMNS;
+      const FOV = Math.PI / 3;
+      const dir = this.pa;
+      for (let c = 0; c < COLUMNS; c++) {
+        const a = dir + (c / COLUMNS - 0.5) * FOV;
+        const dx = Math.cos(a), dy = Math.sin(a);
+        let mx = this.px | 0, my = this.py | 0;
+        const stepX = dx > 0 ? 1 : -1;
+        const stepY = dy > 0 ? 1 : -1;
+        const dXdT = Math.abs(1 / dx);
+        const dYdT = Math.abs(1 / dy);
+        let tx = dx > 0 ? (mx + 1 - this.px) * dXdT : (this.px - mx) * dXdT;
+        let ty = dy > 0 ? (my + 1 - this.py) * dYdT : (this.py - my) * dYdT;
+        let side = 0;
+        let dist = 0;
+        let hit = false;
+        for (let s = 0; s < 64; s++) {
+          if (tx < ty) { mx += stepX; dist = tx; tx += dXdT; side = 0; }
+          else         { my += stepY; dist = ty; ty += dYdT; side = 1; }
+          if (mx < 0 || mx >= this.MW || my < 0 || my >= this.MH) { hit = true; break; }
+          if (this.map[my][mx]) { hit = true; break; }
+        }
+        if (!hit) continue;
+        const perp = Math.max(0.01, dist * Math.cos(a - dir));
+        const sliceH = Math.min(this.h, this.h / perp);
+        const yTop = (this.h - sliceH) * 0.5;
+        const shade = Math.max(0.1, 1 - perp / 10);
+        const sideMul = side === 1 ? 0.65 : 1.0;
+        const r = (255 * shade * sideMul) | 0;
+        const g = (126 * shade * sideMul) | 0;
+        const b = ( 61 * shade * sideMul) | 0;
+        ctx.fillStyle = `rgb(${r},${g},${b})`;
+        ctx.fillRect(c * colW, yTop, colW + 0.5, sliceH);
+      }
+
+      // Mini-map in top-left.
+      const ms = 4;
+      const mx0 = 14, my0 = 14;
+      ctx.fillStyle = 'rgba(10,10,12,0.78)';
+      ctx.fillRect(mx0 - 4, my0 - 4, this.MW * ms + 8, this.MH * ms + 8);
+      for (let y = 0; y < this.MH; y++) {
+        for (let x = 0; x < this.MW; x++) {
+          if (this.map[y][x]) {
+            ctx.fillStyle = '#4a4640';
+            ctx.fillRect(mx0 + x * ms, my0 + y * ms, ms, ms);
+          }
+        }
+      }
+      ctx.fillStyle = ACCENT;
+      ctx.beginPath();
+      ctx.arc(mx0 + this.px * ms, my0 + this.py * ms, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = ACCENT;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(mx0 + this.px * ms, my0 + this.py * ms);
+      ctx.lineTo(mx0 + (this.px + Math.cos(dir) * 3) * ms,
+                 my0 + (this.py + Math.sin(dir) * 3) * ms);
+      ctx.stroke();
+
+      // Manual-mode indicator: bright accent border on the mini-map plus
+      // a "WASD / arrows" label below it.
+      if (this.manualMode) {
+        ctx.strokeStyle = ACCENT;
+        ctx.lineWidth = 1;
+        ctx.strokeRect(mx0 - 4.5, my0 - 4.5, this.MW * ms + 9, this.MH * ms + 9);
+        ctx.fillStyle = ACCENT;
+        ctx.font = '10px JetBrains Mono, monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText('WASD / arrows', mx0 - 1, my0 + this.MH * ms + 14);
+      }
+    }
+  }
+
+  // ============================================================
+  //   026 · MANDELBROT & JULIA (Julia 1918, Mandelbrot 1980)
+  // ============================================================
+  // Left half is the Mandelbrot set: for each point c, iterate z ← z² + c
+  // starting at z = 0 and count how many steps the orbit takes to escape
+  // (or fail to). Right half is the Julia set for the *currently selected*
+  // c: same iteration, but c stays fixed while the starting z sweeps the
+  // plane. As the cursor moves over the Mandelbrot, the corresponding Julia
+  // morphs continuously — every point in the Mandelbrot is its own Julia.
+  class MandelbrotEffect extends Effect {
+    init() {
+      this.W = 360; this.H = 156;
+      this.hw = this.W / 2;
+      this.maxIter = 80;
+      // Bailout radius 16 (squared: 256). The escape-time integer count
+      // has visible banding at the set boundary; a smooth (fractional)
+      // iteration count μ = n + 1 − log₂(log|z|) removes the banding,
+      // but the math is only well-conditioned at a large bailout — that's
+      // why we use 16 instead of the textbook 2.
+      this.BAIL2 = 256;
+      this.LOG2 = Math.log(2);
+      this.cReal = -0.78; this.cImag = 0.18;
+      this.frozen = false;
+      this.mandelDone = false;
+
+      this.off = document.createElement('canvas');
+      this.off.width = this.W; this.off.height = this.H;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.W, this.H);
+    }
+
+    onClick() {
+      // Toggle freeze. While unfrozen, the Julia tracks the cursor; while
+      // frozen, you can move the cursor freely without changing it.
+      this.frozen = !this.frozen;
+    }
+
+    _palette(it) {
+      // Inside the set → near-black. Outside → amber gradient by smooth
+      // iteration count (it is a float, not an integer).
+      if (it >= this.maxIter) return [10, 10, 12];
+      const t = Math.max(0, it / this.maxIter);
+      return [
+        (10 + Math.pow(t, 0.5) * 245) | 0,
+        (10 + Math.pow(t, 1.3) * 200) | 0,
+        (12 + Math.pow(t, 2.2) * 130) | 0,
+      ];
+    }
+
+    update() {
+      if (this.mx !== null && !this.frozen) {
+        const fx = this.mx / this.w;
+        const fy = this.my / this.h;
+        if (fx < 0.5) {
+          // Convert pixel position on the left half to a point in the
+          // Mandelbrot's complex plane.
+          this.cReal = -2.2 + (fx * 2) * 2.9;
+          this.cImag = -1.1 + fy * 2.2;
+        }
+      }
+    }
+
+    render() {
+      const W = this.W, H = this.H, hw = this.hw, M = this.maxIter;
+      const BAIL2 = this.BAIL2, LOG2 = this.LOG2;
+      const data = this.imgData.data;
+
+      // Mandelbrot only needs to be computed once — c varies per pixel but
+      // doesn't depend on time or input. After the first frame the left
+      // half lives in imgData and we just keep it there.
+      if (!this.mandelDone) {
+        for (let y = 0; y < H; y++) {
+          for (let x = 0; x < hw; x++) {
+            const cr = -2.2 + (x / hw) * 2.9;
+            const ci = -1.1 + (y / H) * 2.2;
+            let zr = 0, zi = 0, it = 0;
+            let r2 = 0;
+            while (it < M) {
+              r2 = zr*zr + zi*zi;
+              if (r2 > BAIL2) break;
+              const nr = zr*zr - zi*zi + cr;
+              zi = 2*zr*zi + ci;
+              zr = nr;
+              it++;
+            }
+            let smooth = it;
+            if (it < M) {
+              // μ = n + 1 − log₂(log|z|): the fractional offset that fills
+              // in the gap between integer iteration counts.
+              const logZn = Math.log(r2) * 0.5;
+              smooth = it + 1 - Math.log(logZn / LOG2) / LOG2;
+            }
+            const c = this._palette(smooth);
+            const j = (y * W + x) * 4;
+            data[j] = c[0]; data[j+1] = c[1]; data[j+2] = c[2]; data[j+3] = 255;
+          }
+        }
+        this.mandelDone = true;
+      }
+
+      // Julia recomputed every frame for the current c.
+      const cr = this.cReal, ci = this.cImag;
+      for (let y = 0; y < H; y++) {
+        for (let x = 0; x < hw; x++) {
+          let zr = -1.6 + (x / hw) * 3.2;
+          let zi = -1.1 + (y / H) * 2.2;
+          let it = 0;
+          let r2 = 0;
+          while (it < M) {
+            r2 = zr*zr + zi*zi;
+            if (r2 > BAIL2) break;
+            const nr = zr*zr - zi*zi + cr;
+            zi = 2*zr*zi + ci;
+            zr = nr;
+            it++;
+          }
+          let smooth = it;
+          if (it < M) {
+            const logZn = Math.log(r2) * 0.5;
+            smooth = it + 1 - Math.log(logZn / LOG2) / LOG2;
+          }
+          const c = this._palette(smooth);
+          const j = (y * W + (x + hw)) * 4;
+          data[j] = c[0]; data[j+1] = c[1]; data[j+2] = c[2]; data[j+3] = 255;
+        }
+      }
+
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.fillStyle = BG;
+      this.ctx.fillRect(0, 0, this.w, this.h);
+      this.ctx.imageSmoothingEnabled = true;
+      this.ctx.imageSmoothingQuality = 'high';
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+
+      // Crosshair on the Mandelbrot marking the current c.
+      const ctx = this.ctx;
+      const halfDisplay = this.w / 2;
+      const markerX = ((this.cReal + 2.2) / 2.9) * halfDisplay;
+      const markerY = ((this.cImag + 1.1) / 2.2) * this.h;
+      ctx.strokeStyle = this.frozen ? '#fff5e8' : 'rgba(255, 245, 232, 0.7)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(markerX, markerY, 5, 0, Math.PI * 2);
+      ctx.stroke();
+      if (this.frozen) {
+        ctx.beginPath();
+        ctx.moveTo(markerX - 7, markerY); ctx.lineTo(markerX + 7, markerY);
+        ctx.moveTo(markerX, markerY - 7); ctx.lineTo(markerX, markerY + 7);
+        ctx.stroke();
+      }
+      // Faint divider between Mandelbrot and Julia.
+      ctx.strokeStyle = 'rgba(244, 241, 234, 0.12)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(this.w / 2, 0);
+      ctx.lineTo(this.w / 2, this.h);
+      ctx.stroke();
+    }
+  }
+
+  // ============================================================
+  //   027 · PLASMA EFFECT (demoscene, late 1980s)
+  // ============================================================
+  // Per pixel: sum four sine waves of (x, y, x+y, distance-to-center) at
+  // different frequencies and time offsets, divide to normalize to [-1,1],
+  // and feed through a palette lookup. The interference between waves at
+  // incommensurate frequencies makes the bands shift past one another
+  // continuously — beautiful entropy for fifteen lines of math.
+  class PlasmaEffect extends Effect {
+    init() {
+      this.W = 320; this.H = 138;
+      // Four palettes the user can cycle through. Each maps a [0,1] value
+      // to an [r,g,b] triple. The first is on-brand amber; the rest sweep
+      // through old-school demoscene palettes for variety.
+      this.palettes = [
+        (v) => [
+          (10 + Math.pow(v, 0.6) * 245) | 0,
+          (10 + Math.pow(v, 1.3) * 200) | 0,
+          (12 + Math.pow(v, 2.2) * 130) | 0,
+        ],
+        (v) => [
+          (40 + v * 215) | 0,
+          (10 + Math.pow(v, 2) * 100) | 0,
+          (50 + (1 - v) * 100) | 0,
+        ],
+        (v) => {
+          const r = (v < 0.5 ? v * 2 * 90 : 255) | 0;
+          const g = (v < 0.5 ? v * 2 * 40 : ((v - 0.5) * 2) * 200 + 40) | 0;
+          const b = (v < 0.5 ? (1 - v * 2) * 180 : ((v - 0.5) * 2) * 220) | 0;
+          return [r, g, b];
+        },
+        (v) => { const g = (10 + v * 240) | 0; return [g, g, g]; },
+      ];
+      this.paletteIdx = 0;
+
+      this.off = document.createElement('canvas');
+      this.off.width = this.W; this.off.height = this.H;
+      this.offCtx = this.off.getContext('2d');
+      this.imgData = this.offCtx.createImageData(this.W, this.H);
+    }
+
+    onClick() {
+      this.paletteIdx = (this.paletteIdx + 1) % this.palettes.length;
+    }
+
+    update() {}
+
+    render() {
+      const W = this.W, H = this.H;
+      const t = this.tick * 0.018;
+      const data = this.imgData.data;
+      const pal = this.palettes[this.paletteIdx];
+      // Cursor (or fallback) sets the center of the radial wave term —
+      // moving the cursor visibly slides the bullseye around the canvas.
+      let cx = W * 0.5, cy = H * 0.5;
+      if (this.mx !== null) {
+        cx = (this.mx / this.w) * W;
+        cy = (this.my / this.h) * H;
+      }
+      for (let y = 0; y < H; y++) {
+        for (let x = 0; x < W; x++) {
+          const dx = x - cx, dy = y - cy;
+          const v = (
+            Math.sin(x * 0.06 + t) +
+            Math.sin(y * 0.05 - t * 1.3) +
+            Math.sin((x + y) * 0.04 + t * 0.7) +
+            Math.sin(Math.hypot(dx, dy) * 0.05 - t * 1.5)
+          ) / 4;
+          const u = (v + 1) * 0.5;
+          const c = pal(u);
+          const j = (y * W + x) * 4;
+          data[j] = c[0]; data[j+1] = c[1]; data[j+2] = c[2]; data[j+3] = 255;
+        }
+      }
+      this.offCtx.putImageData(this.imgData, 0, 0);
+      this.ctx.fillStyle = BG;
+      this.ctx.fillRect(0, 0, this.w, this.h);
+      this.ctx.imageSmoothingEnabled = true;
+      this.ctx.imageSmoothingQuality = 'high';
+      this.ctx.drawImage(this.off, 0, 0, this.w, this.h);
+    }
+  }
+
+  // ============================================================
   //   BOOTSTRAP — instantiate, observe, run on visibility
   // ============================================================
   const REGISTRY = {
@@ -4201,6 +5507,13 @@ void main() {
     wfc: WFCEffect,
     lbm: LBMEffect,
     life: LifeEffect,
+    slime: SlimeEffect,
+    marching: MarchingEffect,
+    voronoi: VoronoiEffect,
+    dither: DitherEffect,
+    raycast: RaycastEffect,
+    mandelbrot: MandelbrotEffect,
+    plasma: PlasmaEffect,
   };
 
   // Lazy init: only construct an Effect the first time its canvas enters the
