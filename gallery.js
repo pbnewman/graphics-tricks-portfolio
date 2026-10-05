@@ -383,6 +383,8 @@ function renderCollection(){
   for(const r of matching){
     const card=document.createElement('button');card.type='button';card.className='collection-card';card.style.setProperty('--chapter-accent',r.chapter.color);
     const img=document.createElement('img');img.src=`previews/${r.id}.webp`;img.alt='';img.width=320;img.height=200;img.loading='lazy';
+    // A missing preview becomes a quiet chapter-colored tile rather than a broken image.
+    img.addEventListener('error',()=>{const tile=document.createElement('span');tile.className='card-preview-missing';tile.setAttribute('aria-hidden','true');img.replaceWith(tile);},{once:true});
     const number=document.createElement('span');number.className='card-number';number.textContent=r.number;
     const title=document.createElement('span');title.className='card-title';title.textContent=r.title;
     const category=document.createElement('span');category.className='card-category';category.textContent=`${r.chapter.label}${favorites.has(r.id)?' · Saved':''}`;

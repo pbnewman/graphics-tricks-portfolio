@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import { CHAPTERS, CATALOG } from '../catalog.js';
 import { REGISTRY, makeRandom } from '../effects.js';
 import { validateSettings, parseExperimentHash, experimentHash, controlsFor } from '../state.js';
@@ -43,4 +44,9 @@ test('equal seeds give independent, repeatable random streams', () => {
   assert.deepEqual(first, Array.from({ length: 200 }, b));
   assert.notDeepEqual(first, Array.from({ length: 200 }, c));
   assert.ok(first.every(n => n >= 0 && n < 1));
+});
+
+test('every experiment has a collection preview image', () => {
+  const missing = Object.keys(CATALOG).filter(id => !existsSync(new URL(`../previews/${id}.webp`, import.meta.url)));
+  assert.deepEqual(missing, [], 'Run tools/render-previews.mjs to render missing previews');
 });

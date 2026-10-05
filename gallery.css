@@ -525,8 +525,10 @@ body.dialog-open { overflow: hidden; }
 .collection-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
 .collection-card { text-align: left; background: none; border: 0; border-radius: 0; padding: 0 0 8px; min-width: 0; }
 .collection-card:hover { background: none; color: var(--chapter-accent); }
-.collection-card img { display: block; width: 100%; aspect-ratio: 8 / 5; object-fit: cover; border: 1px solid #3b3434; border-radius: 5px; margin-bottom: 9px; background: #09090b; transition: border-color .2s, transform .2s; }
+.collection-card img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; border: 1px solid #3b3434; border-radius: 5px; margin-bottom: 9px; background: #09090b; transition: border-color .2s, transform .2s; }
 .collection-card:hover img { border-color: var(--chapter-accent); transform: translateY(-2px); }
+.collection-card .card-preview-missing { display: block; aspect-ratio: 8 / 5; border: 1px solid #3b3434; border-radius: 5px; margin-bottom: 9px; background: radial-gradient(circle at 30% 35%, color-mix(in srgb, var(--chapter-accent) 28%, transparent), transparent 65%), #09090b; }
+.collection-card:hover .card-preview-missing { border-color: var(--chapter-accent); }
 .collection-card .card-number { font: italic 16px var(--serif); color: var(--chapter-accent); margin-right: 7px; }
 .collection-card .card-title { font: 400 21px/1.2 var(--serif); }
 .collection-card .card-category { display: block; margin: 5px 0 0; color: var(--fg-muted); font: 400 11px/1.5 var(--mono); }

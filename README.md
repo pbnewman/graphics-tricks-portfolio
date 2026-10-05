@@ -41,6 +41,7 @@ The system reduced-motion preference pauses autoplay on the first visit. **Play 
 - `gallery.js`: input, lazy rendering, controls, navigation, collection, dialogs, and image export.
 - `state.js`: validation and serialization of shareable controls.
 - `previews/`: static thumbnails rendered from the actual experiments. Opening the collection does not start 30 live simulations.
+- `tools/render-previews.mjs`: regenerates `previews/` from the live experiments with a fixed seed. It needs Playwright, which is not a site dependency: `npm install --no-save playwright && node tools/render-previews.mjs` (pass experiment ids to render only those).
 
 ## Checks
 
@@ -50,4 +51,4 @@ node --check gallery.js
 node --check effects.js
 ```
 
-The tests cover complete chapter membership, all experiment link round trips, invalid URL inputs, and independent seeded random streams. Before publishing UI changes, check the gallery on narrow and wide viewports, keyboard navigation, reduced motion, touch dragging, expanded-view restoration, and PNG export (including GPU fluid).
+The tests cover complete chapter membership, all experiment link round trips, invalid URL inputs, independent seeded random streams, and a preview image for every experiment. Before publishing UI changes, check the gallery on narrow and wide viewports, keyboard navigation, reduced motion, touch dragging, expanded-view restoration, and PNG export (including GPU fluid).
