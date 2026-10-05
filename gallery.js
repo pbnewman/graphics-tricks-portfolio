@@ -418,6 +418,8 @@ function openStudio(record,opener){
   $('#studio-title').textContent=record.title;$('#studio-number').textContent=`${record.number} / ${record.chapter.label}`;
   $('.studio-hint').textContent=`${record.meta.hint}. ${record.meta.challenge}`;
   $('[data-action="expand"]',record.stage).hidden=true;
+  // Expanded experiments are always draggable, so the touch play toggle would only turn that off.
+  const touch=$('.touch-play',record.stage);if(touch)touch.hidden=true;
   $('.canvas-frame',record.stage).classList.add('is-interactive');
   records.forEach(clearPointer);studio.showModal();document.body.classList.add('dialog-open');
   createInstance(record);requestAnimationFrame(()=>{record.instance?._setSize();draw(record);wake();});
@@ -427,7 +429,7 @@ studio.addEventListener('close',()=>{
   const record=activeStudio;studioAnchor.replaceWith(record.stage);
   $('[data-action="expand"]',record.stage).hidden=false;
   $('.canvas-frame',record.stage).classList.remove('is-interactive');
-  const touch=$('.touch-play',record.stage);if(touch){touch.textContent='Touch to play';touch.setAttribute('aria-pressed','false');}
+  const touch=$('.touch-play',record.stage);if(touch){touch.hidden=false;touch.textContent='Touch to play';touch.setAttribute('aria-pressed','false');}
   clearPointer(record);activeStudio=null;studioAnchor=null;
   studioOpener?.focus({preventScroll:true});studioOpener=null;
   requestAnimationFrame(()=>{record.instance?._setSize();draw(record);wake();});
